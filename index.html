@@ -2,123 +2,178 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Naija Work Connect - LIVE Meet</title>
+<title>NG Meet - Brown & White - Big</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<meta property="og:title" content="Naija Work Connect - LIVE Meet">
-<meta property="og:description" content="Live chat, meet workers, post jobs instantly in Lagos!">
 <meta property="og:image" content="https://sundizzy064a-ux.github.io/naija-work-connect/logo.png">
-<meta name="theme-color" content="#16a34a">
-<link rel="icon" href="logo.png">
 <style>
-body{background:#0a0a0a;color:#fff;font-family:Inter,system-ui}
-.glass{background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1)}
-.live-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pulse 1.5s infinite;display:inline-block}
-@keyframes pulse{0%{box-shadow:0 0 0 0 #22c55e}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.logo-ng{width:40px;height:40px;background:#16a34a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:18px}
-.msg-me{background:#16a34a;color:#000;margin-left:auto}
-.msg-other{background:#1e1e1e;border:1px solid #2a2a2a}
+body{background:#FFFEF9;color:#3E2723;font-family:Inter,system-ui}
+.brown{background:#6D4C41;color:#fff}
+.brown-light{background:#EFEBE9;border:1px solid #D7CCC8}
+.brown-card{background:#fff;border:2px solid #D7CCC8;box-shadow:0 4px 20px rgba(109,76,65,0.1)}
+.live-dot{width:10px;height:10px;background:#6D4C41;border-radius:50%;animation:pulse 1.5s infinite;display:inline-block}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #6D4C41}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.logo-ng{width:50px;height:50px;background:#6D4C41;border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:22px}
+.big-text{font-size:16px}
+.bigger-text{font-size:18px;font-weight:700}
+.huge-text{font-size:22px;font-weight:900}
 </style>
 </head>
 <body>
-<header class="sticky top-0 z-50 bg-black/90 border-b border-white/10 p-3">
+<header class="sticky top-0 z-50 bg-white border-b-4 border-[#6D4C41] p-4 shadow-lg">
 <div class="max-w-6xl mx-auto flex justify-between items-center">
-<div class="flex items-center gap-3"><div class="logo-ng">NG</div><div><h1 class="font-black leading-none text-sm">NAIJA WORK CONNECT</h1><div class="text-xs text-green-400 flex items-center gap-1"><span class="live-dot"></span><span id="liveCount">LIVE • 3 online</span></div></div></div>
-<button onclick="openPost()" class="bg-white text-black px-4 py-2 rounded-full font-bold text-xs">+ POST</button>
+<div class="flex items-center gap-4"><div class="logo-ng">NG</div><div><h1 class="huge-text text-[#6D4C41]">NG FUN MEET</h1><div class="big-text text-[#6D4C41] flex items-center gap-2 font-bold"><span class="live-dot"></span><span id="count">BROWN & WHITE • BIG • PERFECT</span></div></div></div>
+<button id="joinBtn" onclick="openJoin()" class="brown px-8 py-3 rounded-full font-black text-lg shadow-lg">+ JOIN</button>
+<button id="outBtn" onclick="logout()" class="hidden bg-[#EFEBE9] border-2 border-[#6D4C41] text-[#6D4C41] px-6 py-3 rounded-full font-bold">LOGOUT</button>
 </div>
-<div class="max-w-6xl mx-auto flex gap-2 mt-3">
-<button onclick="tab='jobs';render()" id="tabJobs" class="flex-1 bg-white text-black py-2 rounded-full text-xs font-bold">💼 Jobs</button>
-<button onclick="tab='chat';render()" id="tabChat" class="flex-1 glass py-2 rounded-full text-xs font-bold">💬 LIVE Chat <span id="chatBadge" class="bg-green-500 text-black px-2 rounded-full ml-1">LIVE</span></button>
-<button onclick="tab='people';render()" id="tabPeople" class="flex-1 glass py-2 rounded-full text-xs font-bold">👥 People</button>
+<div class="max-w-6xl mx-auto flex gap-3 mt-4">
+<button onclick="showTab('people')" id="tabP" class="brown px-6 py-3 rounded-full font-black text-base">👥 PEOPLE</button>
+<button onclick="showTab('chat')" id="tabC" class="brown-light text-[#6D4C41] px-6 py-3 rounded-full font-bold text-base">💬 PUBLIC GIST</button>
 </div>
 </header>
 
-<div class="max-w-6xl mx-auto p-3 pb-20">
-<div id="jobsSection"></div>
-<div id="chatSection" class="hidden">
-<div class="glass rounded-2xl p-3 mb-3 flex items-center gap-2 text-xs"><span class="live-dot"></span><span id="onlineText">12 people dey inside chat now - everybody go see your message!</span></div>
-<div id="chatMessages" class="space-y-2 max-h-[60vh] overflow-y-auto p-2"></div>
-<div class="fixed bottom-0 left-0 right-0 max-w-6xl mx-auto p-3 bg-black border-t border-white/10 flex gap-2">
-<input id="chatName" placeholder="Your name" class="w-24 bg-white/10 border border-white/10 rounded-full px-4 py-3 text-xs outline-none">
-<input id="chatInput" onkeypress="if(event.key==='Enter')sendMsg()" placeholder="Type message... everybody go see am!" class="flex-1 bg-white/10 border border-white/10 rounded-full px-5 py-3 text-sm outline-none">
-<button onclick="sendMsg()" class="bg-green-500 text-black w-12 h-12 rounded-full font-bold"><i class="fa fa-paper-plane"></i></button>
+<div class="max-w-6xl mx-auto p-4 pb-32">
+<div id="peopleTab"><div id="grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div></div>
+<div id="chatTab" class="hidden">
+<div class="brown-card rounded-3xl p-5 mb-4"><p class="bigger-text text-[#6D4C41]"><span class="live-dot"></span> PUBLIC GIST ROOM - BIG LETTERS, BROWN & WHITE, PERFECT!</p><p class="big-text">Everybody wey join dey see am LIVE inside app!</p></div>
+<div id="publicChats" class="space-y-4 max-h-[60vh] overflow-y-auto p-2"></div>
 </div>
-</div>
-<div id="peopleSection" class="hidden"></div>
 </div>
 
-<div id="postModal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-end md:items-center justify-center">
-<div class="bg-[#1a1a1a] w-full md:max-w-lg rounded-t-3xl md:rounded-2xl p-5 border border-white/10">
-<div class="flex justify-between mb-4"><h3 class="font-bold">Post Job LIVE</h3><button onclick="closePost()" class="w-8 h-8 rounded-full bg-white/10">x</button></div>
-<div class="space-y-3">
-<input id="pTitle" placeholder="Job Title" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none">
-<select id="pCat" class="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm"><option value="cleaning">Cleaning</option><option value="plumbing">Plumbing</option><option value="electrical">Electrical</option><option value="laundry">Laundry</option></select>
-<select id="pLoc" class="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm"><option>Ikeja</option><option>Lekki</option><option>Yaba</option><option>Surulere</option></select>
-<input id="pPrice" type="number" placeholder="Price" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm">
-<textarea id="pDesc" placeholder="Describe..." rows="2" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm"></textarea>
-<input id="pPhone" placeholder="WhatsApp" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm">
-<button onclick="postJob()" class="w-full bg-green-500 text-black font-bold py-3 rounded-xl">POST LIVE!</button>
+<div id="publicInput" class="fixed bottom-0 left-0 right-0 max-w-6xl mx-auto p-4 bg-white border-t-4 border-[#6D4C41] flex gap-3 z-30 shadow-2xl">
+<input id="pChatInput" placeholder="Type PUBLIC gist... BIG LETTERS! Everybody go see am!" class="flex-1 bg-[#EFEBE9] border-2 border-[#6D4C41] rounded-full px-6 py-4 text-lg font-bold outline-none text-[#3E2723]">
+<button onclick="sendPublic()" class="brown w-16 h-16 rounded-full text-xl"><i class="fa fa-paper-plane"></i></button>
 </div>
+
+<div id="joinModal" class="fixed inset-0 bg-[#6D4C41]/90 z-50 flex items-center justify-center p-4">
+<div class="bg-white w-full max-w-md rounded-3xl p-8 border-4 border-[#6D4C41] text-center shadow-2xl">
+<div class="logo-ng mx-auto mb-4 w-20 h-20 text-3xl">NG</div>
+<h3 class="huge-text text-[#6D4C41]">JOIN NOW - PERFECT!</h3><p class="big-text text-[#6D4C41]/70 mb-6 font-bold">Brown & White • Big Letters • Fun!</p>
+<div class="space-y-4 text-left">
+<div class="flex justify-center">
+<label class="w-28 h-28 rounded-full bg-[#EFEBE9] border-4 border-[#6D4C41] border-dashed flex flex-col items-center justify-center cursor-pointer overflow-hidden">
+<input type="file" id="photoInput" accept="image/*" class="hidden" onchange="loadPhoto(event)">
+<span id="photoPlaceholder" class="font-bold text-[#6D4C41]">📸<br>BIG PHOTO</span>
+<img id="photoPreview" class="hidden w-full h-full object-cover">
+</label>
+</div>
+<input id="name" placeholder="YOUR BIG NAME e.g. WALE" class="w-full bg-[#EFEBE9] border-2 border-[#6D4C41] rounded-full px-6 py-4 text-lg font-bold outline-none">
+<select id="loc" class="w-full bg-[#EFEBE9] border-2 border-[#6D4C41] rounded-full px-6 py-4 text-lg font-bold"><option>SAGAMU</option><option>IKENNE</option><option>REMO</option><option>LAGOS</option><option>ABEOKUTA</option><option>EVERYWHERE</option></select>
+<input id="vibe" placeholder="YOUR BIG VIBE! e.g. FUN, ARTS, CONTENT!" class="w-full bg-[#EFEBE9] border-2 border-[#6D4C41] rounded-full px-6 py-4 text-lg font-bold outline-none">
+<button onclick="join()" class="w-full brown py-4 rounded-full font-black text-xl shadow-lg">JOIN NOW - BIG & PERFECT!</button>
+</div>
+</div>
+</div>
+
+<div id="chatModal" class="fixed inset-0 bg-white z-50 hidden flex flex-col">
+<div class="p-4 border-b-4 border-[#6D4C41] flex items-center gap-4 bg-[#EFEBE9]">
+<button onclick="closeChat()" class="w-12 h-12 rounded-full brown flex items-center justify-center text-xl"><i class="fa fa-arrow-left"></i></button>
+<img id="cPhoto" src="" class="w-14 h-14 rounded-full object-cover border-3 border-[#6D4C41]">
+<div><h3 id="cName" class="bigger-text text-[#6D4C41]"></h3><p class="big-text text-[#6D4C41] font-bold flex items-center gap-2"><span class="live-dot"></span>ONLINE - CHAT INSIDE APP - BIG!</p></div>
+</div>
+<div id="cMessages" class="flex-1 overflow-y-auto p-5 space-y-4 bg-[#FFFEF9]"></div>
+<div class="p-4 bg-white border-t-4 border-[#6D4C41] flex gap-3">
+<input id="cInput" onkeypress="if(event.key==='Enter')sendPrivate()" placeholder="Type BIG message... inside app!" class="flex-1 bg-[#EFEBE9] border-2 border-[#6D4C41] rounded-full px-6 py-4 text-lg font-bold outline-none">
+<button onclick="sendPrivate()" class="brown w-16 h-16 rounded-full text-xl"><i class="fa fa-paper-plane"></i></button>
 </div>
 </div>
 
 <script>
-const API="https://crudcrud.com/api/1681de00cc2541829e1f7b9eef1e467e";
-let tab='chat';
-let jobs=JSON.parse(localStorage.getItem('naija_jobs')||'null')||[{id:1,title:"House Cleaning",cat:"cleaning",loc:"Lekki",price:25000,desc:"Urgent",phone:"08012345678",time:Date.now()}];
-let messages=JSON.parse(localStorage.getItem('naija_msgs')||'null')||[{name:"Admin",text:"Welcome to Naija Work Connect LIVE! Everybody dey see each other here! 🔥",time:Date.now()-60000},{name:"Sundizzy",text:"If you open app now, you go see this chat LIVE!",time:Date.now()-30000}];
-let myName=localStorage.getItem('myName')||'';
-function saveJobs(){localStorage.setItem('naija_jobs',JSON.stringify(jobs));}
-function saveMsgs(){localStorage.setItem('naija_msgs',JSON.stringify(messages.slice(-50)));localStorage.setItem('myName',myName);}
+let me=JSON.parse(localStorage.getItem('ng_brown_me')||'null');
+let people=JSON.parse(localStorage.getItem('ng_brown_people')||'null')||[
+{name:"WALE",loc:"SAGAMU",vibe:"FUN GUY - LOVE ARTS & MUSIC! BIG VIBE!",photo:"https://api.dicebear.com/7.x/avataaars/svg?seed=WALE",time:Date.now()},
+{name:"AMAKA",loc:"SAGAMU",vibe:"CONTENT CREATOR - BIG ENERGY!",photo:"https://api.dicebear.com/7.x/avataaars/svg?seed=AMAKA",time:Date.now()},
+{name:"TUNDE",loc:"REMO",vibe:"NO STRESS - JUST BIG FUN!",photo:"https://api.dicebear.com/7.x/avataaars/svg?seed=TUNDE",time:Date.now()}
+];
+let publicChats=JSON.parse(localStorage.getItem('ng_brown_public')||'[]');
+let privateChats=JSON.parse(localStorage.getItem('ng_brown_private')||'{}');
+let currentChatWith=null;
 
-async function loadLive(){
- try{
-  let r=await fetch(API+'/profiles');if(r.ok){let d=await r.json();if(d.length>0)jobs=d.map(x=>({id:x._id,title:x.name,cat:x.skill||'cleaning',loc:x.location||'Lekki',price:x.bio||5000,desc:x.whatsapp||'',phone:x.whatsapp||'',time:Date.now()}));}
-  let r2=await fetch(API+'/messages');if(r2.ok){let m=await r2.json();if(m.length>0)messages=m.map(x=>({name:x.name,text:x.text,time:x.time||Date.now()}));}
- }catch(e){}
+function loadPhoto(e){
+ let file=e.target.files[0];if(!file)return;
+ let reader=new FileReader();reader.onload=ev=>{
+  document.getElementById('photoPreview').src=ev.target.result;
+  document.getElementById('photoPreview').classList.remove('hidden');
+  document.getElementById('photoPlaceholder').classList.add('hidden');
+  window.tempPhoto=ev.target.result;
+ };reader.readAsDataURL(file);
+}
+function save(){localStorage.setItem('ng_brown_people',JSON.stringify(people));localStorage.setItem('ng_brown_public',JSON.stringify(publicChats.slice(-100)));localStorage.setItem('ng_brown_private',JSON.stringify(privateChats));if(me)localStorage.setItem('ng_brown_me',JSON.stringify(me));}
+function openJoin(){document.getElementById('joinModal').classList.remove('hidden');}
+function join(){
+ let name=document.getElementById('name').value,loc=document.getElementById('loc').value,vibe=document.getElementById('vibe').value;
+ if(!name)return alert('PUT BIG NAME!');
+ let photo=window.tempPhoto||`https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`;
+ let u={name:name.toUpperCase(),loc,vibe:vibe.toUpperCase(),photo,time:Date.now()};
+ people.unshift(u);me=u;save();
+ document.getElementById('joinModal').classList.add('hidden');
+ document.getElementById('joinBtn').classList.add('hidden');
+ document.getElementById('outBtn').classList.remove('hidden');
  render();
+}
+function logout(){me=null;localStorage.removeItem('ng_brown_me');location.reload();}
+function showTab(t){
+ document.getElementById('peopleTab').classList.toggle('hidden',t!=='people');
+ document.getElementById('chatTab').classList.toggle('hidden',t!=='chat');
+ document.getElementById('publicInput').classList.toggle('hidden',t!=='chat');
+ document.getElementById('tabP').className=t==='people'?'brown px-6 py-3 rounded-full font-black text-base':'brown-light text-[#6D4C41] px-6 py-3 rounded-full font-bold text-base';
+ document.getElementById('tabC').className=t==='chat'?'brown px-6 py-3 rounded-full font-black text-base':'brown-light text-[#6D4C41] px-6 py-3 rounded-full font-bold text-base';
+ if(t==='chat')renderPublic();
 }
 function render(){
- document.getElementById('tabJobs').className=tab=='jobs'?'flex-1 bg-white text-black py-2 rounded-full text-xs font-bold':'flex-1 glass py-2 rounded-full text-xs font-bold';
- document.getElementById('tabChat').className=tab=='chat'?'flex-1 bg-white text-black py-2 rounded-full text-xs font-bold':'flex-1 glass py-2 rounded-full text-xs font-bold';
- document.getElementById('tabPeople').className=tab=='people'?'flex-1 bg-white text-black py-2 rounded-full text-xs font-bold':'flex-1 glass py-2 rounded-full text-xs font-bold';
- document.getElementById('jobsSection').classList.toggle('hidden',tab!=='jobs');
- document.getElementById('chatSection').classList.toggle('hidden',tab!=='chat');
- document.getElementById('peopleSection').classList.toggle('hidden',tab!=='people');
- if(tab=='jobs'){
-  document.getElementById('jobsSection').innerHTML=`<div class="grid md:grid-cols-2 gap-3">${jobs.map(j=>`<div class="glass rounded-2xl p-4 border border-white/10"><div class="flex justify-between mb-1"><span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">${j.cat} • ${j.loc}</span><span class="text-xs text-white/40">now</span></div><h3 class="font-bold text-sm">${j.title}</h3><p class="text-xs text-white/60 mb-2">${j.desc}</p><div class="flex justify-between"><span class="font-bold text-green-400 text-sm">₦${j.price}</span><a href="https://wa.me/234${(j.phone+'').slice(-10)}" target="_blank" class="bg-white text-black px-3 py-1 rounded-full text-xs font-bold">Chat</a></div></div>`).join('')}</div>`;
- }
- if(tab=='chat'){
-  document.getElementById('chatMessages').innerHTML=messages.map(m=>{
-   let isMe=myName&&m.name===myName;
-   return `<div class="flex flex-col ${isMe?'items-end':'items-start'}"><div class="${isMe?'msg-me':'msg-other'} rounded-2xl px-4 py-2 max-w-[80%]"><div class="text-[10px] opacity-60 font-bold">${m.name}</div><div class="text-sm">${m.text}</div></div><div class="text-[10px] text-white/30 mt-1">${new Date(m.time).toLocaleTimeString()}</div></div>`;
-  }).join('');
-  let el=document.getElementById('chatMessages');el.scrollTop=el.scrollHeight;
-  document.getElementById('onlineText').innerText=`${messages.length+3} people don chat - everybody dey see LIVE!`;
- }
- if(tab=='people'){
-  let names=[...new Set(messages.map(m=>m.name))];
-  document.getElementById('peopleSection').innerHTML=`<div class="glass rounded-2xl p-4"><h3 class="font-bold mb-3">People Wey Dey Online Now (${names.length})</h3><div class="space-y-3">${names.map(n=>`<div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center font-bold text-black">${n[0]}</div><div><p class="font-bold text-sm">${n}</p><p class="text-xs text-green-400 flex items-center gap-1"><span class="live-dot"></span>Online now - dey inside chat</p></div><a href="https://wa.me/" class="ml-auto bg-white/10 px-3 py-1 rounded-full text-xs">Chat</a></div>`).join('')}</div></div>`;
- }
- document.getElementById('liveCount').innerText=`LIVE • ${messages.length} chats • ${jobs.length} jobs`;
- document.getElementById('chatName').value=myName;
+ document.getElementById('grid').innerHTML=people.map((p,i)=>`
+ <div onclick="openChat(${i})" class="brown-card rounded-3xl p-5 cursor-pointer hover:shadow-2xl transition">
+  <img src="${p.photo}" class="w-full h-40 object-cover rounded-2xl mb-3 border-4 border-[#D7CCC8]">
+  <div class="flex items-center gap-2"><h3 class="bigger-text text-[#6D4C41]">${p.name} ${me&&p.name===me.name?'(YOU)':''}</h3><span class="live-dot"></span></div>
+  <p class="big-text font-bold text-[#8D6E63]">📍 ${p.loc}</p>
+  <p class="big-text mt-2 font-bold text-[#3E2723]">${p.vibe||'BIG FUN!'}</p>
+  <div class="brown py-3 rounded-full text-center font-black text-base mt-4">💬 BIG CHAT INSIDE APP</div>
+ </div>
+ `).join('');
+ document.getElementById('count').innerText=`${people.length} PEOPLE - BROWN & WHITE - BIG & PERFECT!`;
+ if(me){document.getElementById('joinBtn').classList.add('hidden');document.getElementById('outBtn').classList.remove('hidden');document.getElementById('joinModal').classList.add('hidden');}
 }
-async function sendMsg(){
- let name=document.getElementById('chatName').value||'Anon';
- let text=document.getElementById('chatInput').value;
- if(!text)return;
- myName=name;
- let msg={name,text,time:Date.now()};
- messages.push(msg);saveMsgs();
- document.getElementById('chatInput').value='';
- render();
- try{await fetch(API+'/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(msg)});}catch(e){}
- try{await fetch(API+'/profiles',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,skill:'chatting',location:'Lagos',whatsapp:text,bio:Date.now()})});}catch(e){}
+function renderPublic(){
+ document.getElementById('publicChats').innerHTML=publicChats.map(m=>`
+ <div class="brown-card rounded-3xl p-5"><div class="flex gap-3"><div class="w-12 h-12 rounded-full brown flex items-center justify-center font-black text-lg">${m.name[0]}</div><div><div class="bigger-text text-[#6D4C41]">${m.name} • ${m.loc}</div><div class="big-text font-bold mt-1">${m.text}</div><div class="text-sm text-[#8D6E63] mt-1">${new Date(m.time).toLocaleTimeString()}</div></div></div></div>
+ `).join('')||`<div class="text-center py-10 bigger-text text-[#8D6E63]">NO PUBLIC GIST YET - BE FIRST TO POST BIG MESSAGE!</div>`;
+ let el=document.getElementById('publicChats');el.scrollTop=el.scrollHeight;
 }
-function openPost(){document.getElementById('postModal').classList.remove('hidden');}
-function closePost(){document.getElementById('postModal').classList.add('hidden');}
-function postJob(){let j={id:Date.now(),title:document.getElementById('pTitle').value,cat:document.getElementById('pCat').value,loc:document.getElementById('pLoc').value,price:document.getElementById('pPrice').value||5000,desc:document.getElementById('pDesc').value,phone:document.getElementById('pPhone').value,time:Date.now()};if(!j.title)return alert('Add title');jobs.unshift(j);saveJobs();closePost();render();alert('Job don go LIVE! Everybody go see am!');}
-render();loadLive();setInterval(loadLive,3000);
+function openChat(i){
+ if(!me)return openJoin();
+ let p=people[i];if(p.name===me.name)return alert('NA YOU BE THIS - BIG YOU!');
+ currentChatWith=p;
+ document.getElementById('cPhoto').src=p.photo;
+ document.getElementById('cName').innerText=p.name;
+ document.getElementById('chatModal').classList.remove('hidden');
+ renderPrivate();
+}
+function closeChat(){document.getElementById('chatModal').classList.add('hidden');}
+function renderPrivate(){
+ if(!currentChatWith)return;
+ let key=[me.name,currentChatWith.name].sort().join('_');
+ let msgs=privateChats[key]||[];
+ document.getElementById('cMessages').innerHTML=msgs.map(m=>`
+ <div class="flex ${m.from===me.name?'justify-end':'justify-start'}"><div class="${m.from===me.name?'brown':'brown-light text-[#3E2723]'} rounded-3xl px-6 py-4 max-w-[80%]"><div class="big-text font-bold">${m.text}</div><div class="text-xs opacity-70 mt-1">${new Date(m.time).toLocaleTimeString()}</div></div></div>
+ `).join('')||`<div class="text-center py-20 bigger-text text-[#8D6E63]">NO MESSAGE YET WITH ${currentChatWith.name}<br><span class="big-text">START BIG FUN GIST INSIDE APP!</span></div>`;
+ let el=document.getElementById('cMessages');el.scrollTop=el.scrollHeight;
+}
+function sendPrivate(){
+ let t=document.getElementById('cInput').value;if(!t||!currentChatWith)return;
+ let key=[me.name,currentChatWith.name].sort().join('_');
+ if(!privateChats[key])privateChats[key]=[];
+ privateChats[key].push({from:me.name,to:currentChatWith.name,text:t.toUpperCase(),time:Date.now()});
+ save();document.getElementById('cInput').value='';renderPrivate();
+ setTimeout(()=>{privateChats[key].push({from:currentChatWith.name,to:me.name,text:"BIG MESSAGE RECEIVED! FUN INSIDE APP! 😎",time:Date.now()});save();renderPrivate();},1200);
+}
+function sendPublic(){
+ if(!me)return openJoin();
+ let t=document.getElementById('pChatInput').value;if(!t)return;
+ publicChats.push({name:me.name,loc:me.loc,text:t.toUpperCase(),time:Date.now()});
+ save();document.getElementById('pChatInput').value='';renderPublic();
+}
+render();renderPublic();
+if(!me)document.getElementById('joinModal').classList.remove('hidden');
 </script>
 </body>
 </html>

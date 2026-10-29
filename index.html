@@ -3,98 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NG MEET - Language + Perfect</title>
+<title>NG MEET</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial Black,Arial,sans-serif;background:#fff;color:#3E2723;padding-bottom:110px}
-.header{background:#4E342E;color:#fff;padding:18px;text-align:center;position:sticky;top:0;z-index:20;border-bottom:6px solid #FFD54F}
-.header h1{font-size:34px} .header p{font-size:18px;font-family:Arial}
-.lang-bar{background:#3E2723;padding:10px;display:flex;gap:6px;overflow-x:auto;justify-content:center}
-.lang-bar button{padding:10px 16px;border-radius:20px;border:2px solid #FFD54F;background:#fff;font-weight:900;font-size:14px;white-space:nowrap}
-.lang-bar button.active{background:#FFD54F;color:#3E2723}
-.perfect-bar{background:#FFD54F;color:#3E2723;padding:12px;text-align:center;font-weight:900;font-size:20px}
-.container{padding:14px;max-width:700px;margin:auto}
-.card{background:#fff;border:4px solid #4E342E;border-radius:22px;margin-bottom:20px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.2)}
-.card img{width:100%;height:380px;object-fit:cover;background:#EFEBE9}
-.card-body{padding:18px} .card-body h2{font-size:28px} .card-body p{font-size:20px;margin:6px 0;font-family:Arial}
-.tag{display:inline-block;background:#4E342E;color:#FFD54F;padding:6px 14px;border-radius:30px;font-size:15px;font-weight:bold;margin:3px}
-.btn{background:#4E342E;color:#fff;border:none;padding:18px;width:100%;border-radius:14px;font-size:23px;font-weight:900;margin-top:10px}
-.btn-yellow{background:#FFD54F;color:#3E2723} .btn-green{background:#2E7D32;color:#fff} .btn-outline{background:#fff;color:#4E342E;border:4px solid #4E342E}
-input,select,textarea{width:100%;padding:18px;margin:10px 0;border:4px solid #4E342E;border-radius:14px;font-size:20px;font-family:Arial;font-weight:bold}
-.filter-bar{display:flex;gap:8px;overflow-x:auto;padding:10px 0}
-.filter-bar button{white-space:nowrap;padding:10px 16px;border-radius:30px;border:3px solid #4E342E;background:#fff;font-weight:900;font-size:15px;flex-shrink:0}
-.filter-bar button.active{background:#4E342E;color:#FFD54F}
-.chat-box{border:4px solid #4E342E;height:340px;overflow-y:auto;padding:12px;border-radius:16px;background:#FFF8E1;margin:10px 0}
-.bottom-nav{position:fixed;bottom:0;width:100%;max-width:700px;left:50%;transform:translateX(-50%);background:#4E342E;display:flex;gap:6px;padding:10px;z-index:20;border-top:4px solid #FFD54F}
-.bottom-nav button{flex:1;padding:14px;border-radius:12px;border:none;font-weight:900;font-size:15px}
-.share-box{background:#FFF8E1;border:4px dashed #4E342E;padding:14px;border-radius:18px;margin:12px 0;text-align:center}
+body{font-family:SFProDisplay-Regular, Helvetica, Arial, sans-serif;background:#F0F2F5;color:#050505;overflow-x:hidden}
+.fb-top{background:#fff;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:30;box-shadow:0 1px 2px rgba(0,0,0,0.1)}
+.fb-top h1{color:#1877F2;font-size:30px;font-weight:900;letter-spacing:-1px}
+.fb-top-icons{display:flex;gap:10px}
+.fb-top-icons div{width:40px;height:40px;background:#F0F2F5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+.lang-strip{background:#fff;padding:8px 10px;display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid #E4E6EB}
+.lang-strip button{padding:6px 12px;border-radius:16px;border:1px solid #1877F2;background:#fff;font-weight:600;font-size:12px;white-space:nowrap}
+.lang-strip button.active{background:#1877F2;color:#fff}
+.main{max-width:500px;margin:0 auto;background:#F0F2F5;min-height:100vh;padding-bottom:55px}
+.story-row{background:#fff;padding:10px;display:flex;gap:8px;overflow-x:auto;border-bottom:1px solid #E4E6EB;margin-bottom:8px}
+.story{flex-shrink:0;text-align:center;width:65px}
+.story-img{width:60px;height:60px;border-radius:12px;background:linear-gradient(45deg,#1877F2,#42A5F5);padding:2px}
+.story-img div{width:100%;height:100%;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;overflow:hidden}
+.story-img img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.story p{font-size:11px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card{background:#fff;margin-bottom:8px;box-shadow:0 1px 1px rgba(0,0,0,0.08)}
+.create-box{padding:12px;display:flex;gap:10px;align-items:center}
+.create-box img{width:40px;height:40px;border-radius:50%;background:#E4E6EB;object-fit:cover}
+.create-box button{flex:1;text-align:left;background:#F0F2F5;border:none;padding:12px 16px;border-radius:20px;color:#65676B;font-size:15px}
+.post-head{padding:12px;display:flex;gap:10px;align-items:center}
+.post-head img{width:40px;height:40px;border-radius:50%;background:#E4E6EB;object-fit:cover}
+.post-head-info{flex:1}
+.post-head-info b{font-size:15px}
+.post-head-info p{font-size:12px;color:#65676B}
+.post-text{padding:0 12px 10px;font-size:15px;line-height:1.35}
+.post-img{width:100%;max-height:500px;object-fit:cover;background:#F0F2F5;display:block}
+.post-stats{padding:8px 12px;display:flex;justify-content:space-between;color:#65676B;font-size:13px;border-bottom:1px solid #E4E6EB}
+.post-actions{display:flex}
+.post-actions button{flex:1;background:none;border:none;padding:12px;font-weight:600;color:#65676B;font-size:14px;display:flex;align-items:center;justify-content:center;gap:6px}
+.bottom-nav{position:fixed;bottom:0;width:100%;max-width:500px;left:50%;transform:translateX(-50%);background:#fff;display:flex;border-top:1px solid #ddd;z-index:30}
+.bottom-nav button{flex:1;padding:12px 0;border:none;background:#fff;color:#65676B;font-size:18px}
+.bottom-nav button.active{color:#1877F2}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:50;display:flex;align-items:flex-end}
+.modal-box{background:#fff;border-radius:12px 12px 0 0;padding:16px;width:100%;max-width:500px;margin:0 auto;max-height:90vh;overflow-y:auto}
+.modal-box h2{font-size:20px;margin-bottom:12px}
+.modal-box input,.modal-box select,.modal-box textarea{width:100%;padding:14px;margin:8px 0;border:none;background:#F0F2F5;border-radius:8px;font-size:16px}
+.btn-blue{background:#1877F2;color:#fff;border:none;padding:14px;width:100%;border-radius:8px;font-size:16px;font-weight:700;margin-top:10px}
+.btn-gray{background:#E4E6EB;color:#050505;border:none;padding:12px;width:100%;border-radius:8px;font-size:15px;font-weight:600;margin-top:8px}
+.empty{text-align:center;padding:40px 20px;background:#fff;margin-bottom:8px;color:#65676B}
+.people-card{display:flex;gap:10px;padding:12px;align-items:center;background:#fff;margin-bottom:1px}
+.people-card img{width:60px;height:60px;border-radius:50%;background:#E4E6EB;object-fit:cover}
+.people-info{flex:1}
+.people-info b{font-size:15px}
+.people-info p{font-size:12px;color:#65676B}
+.people-card button{background:#E7F3FF;color:#1877F2;border:none;padding:8px 16px;border-radius:6px;font-weight:700;font-size:13px}
 </style>
 </head>
 <body>
-<div class="header"><h1>🤎 NG MEET 🤎</h1><p id="hdr_sub">ARTIST • CONTENT • BARBER • TAILOR • EVERYBODY</p></div>
-<div class="lang-bar">
-<button id="btn-en" onclick="setLang('en')" class="active">🇬🇧 English</button>
-<button id="btn-pg" onclick="setLang('pg')">🇳🇬 Pidgin</button>
-<button id="btn-yo" onclick="setLang('yo')">Yoruba</button>
-<button id="btn-ig" onclick="setLang('ig')">Igbo</button>
-<button id="btn-ha" onclick="setLang('ha')">Hausa</button>
+<div class="fb-top"><h1>NG Meet</h1><div class="fb-top-icons"><div>🔍</div><div onclick="openSignup()">👤</div><div>💬</div></div></div>
+<div class="lang-strip">
+<button id="l-en" onclick="setLang('en')" class="active">English</button>
+<button id="l-pg" onclick="setLang('pg')">Pidgin</button>
+<button id="l-yo" onclick="setLang('yo')">Yoruba</button>
+<button id="l-ig" onclick="setLang('ig')">Igbo</button>
+<button id="l-ha" onclick="setLang('ha')">Hausa</button>
 </div>
-<div class="perfect-bar" id="top_bar">🔥 PERFECT - PEOPLE FIT CHANGE LANGUAGE 🔥</div>
-<div class="container" id="app"></div>
+<div class="main" id="app"></div>
 <div class="bottom-nav">
-<button onclick="showPage('home')" id="nav_home" style="background:#fff;color:#4E342E">HOME</button>
-<button onclick="showPage('signup')" id="nav_signup" style="background:#FFD54F;color:#4E342E">SIGN UP</button>
-<button onclick="shareApp()" id="nav_share" style="background:#2E7D32;color:#fff">SHARE</button>
+<button id="nav_home" onclick="showPage('home')" class="active">🏠</button>
+<button id="nav_people" onclick="showPage('people')">👥</button>
+<button id="nav_post" onclick="showPage('create')">➕</button>
+<button id="nav_profile" onclick="showPage('profile')">👤</button>
 </div>
-<script>
-let curLang = localStorage.getItem('ng_lang')||'en';
-let dict = {
-en:{hdr:"ARTIST • CONTENT • BARBER • TAILOR • EVERYBODY",everybody:"Everybody",artist:"Artist",content:"Content Creator",barber:"Barber",tailor:"Tailor",home:"HOME",signup:"SIGN UP",share:"SHARE",filter_all:"All",public_title:"PUBLIC APP - SHARE MAKE EVERYBODY JOIN",public_desc:"Artist dey, Content dey, Barber, Tailor - everybody go show here immediately after sign up!",share_btn:"📤 SHARE APP LINK",every_title:"Everybody",no_person:"No person yet for",be_first:"Be first!",chat_btn:"💬 BIG CHAT WITH",inside:"INSIDE APP",public_gist:"💬 PUBLIC GIST - EVERYBODY GO GIST HERE",type_public:"Type public gist...",send_public:"SEND FOR PUBLIC - BIG",signup_title:"📝 SIGN UP - EVERYTHING DEY HERE",signup_desc:"Artist, Content, Barber, Tailor - Choose your work! You go show for HOME immediately!",name_ph:"Your Full Name",phone_ph:"Phone Number - 080...",location_ph:"Your Location - Lagos, Abuja, Anywhere",photo_ph:"Photo Link (optional)",bio_ph:"Wetin you dey do?",signup_now:"✅ SIGN UP NOW - I GO SHOW FOR PUBLIC",back_home:"⬅️ BACK TO HOME",chat_with:"💬 BIG CHAT WITH",type_msg:"Type message...",send_inside:"SEND MESSAGE INSIDE APP - BIG",back:"⬅️ BACK",your_name:"Your name?",you_be:"You be Artist, Content, Barber, Tailor?",filter_label:"Filter by work"},
-pg:{hdr:"ARTIST • CONTENT • BARBER • TAILOR • EVERYBODY DEY",everybody:"Everybody",artist:"Artist",content:"Content Creator",barber:"Barber",tailor:"Tailor",home:"HOUSE",signup:"JOIN US",share:"SHARE AM",filter_all:"All of dem",public_title:"PUBLIC APP - SHARE MAKE EVERYBODY JOIN AM",public_desc:"Artist dey, Content dey, Barber, Tailor - once you join, you go show for house sharp sharp!",share_btn:"📤 SHARE APP LINK GIVE FRIEND",every_title:"Everybody Wey Dey",no_person:"No person for",be_first:"Na you go first!",chat_btn:"💬 GIST WITH",inside:"FOR INSIDE APP",public_gist:"💬 PUBLIC GIST - MAKE EVERYBODY GIST",type_public:"Type wetin you wan yarn for public...",send_public:"SEND AM FOR PUBLIC",signup_title:"📝 JOIN US - EVERYTHING DEY HERE",signup_desc:"Artist, Content, Barber, Tailor - Choose your hustle! You go show for house immediately!",name_ph:"Your Full Name",phone_ph:"Phone Number - 080...",location_ph:"Your Location - Lagos, Abuja, Anywhere",photo_ph:"Photo Link (you fit leave am)",bio_ph:"Wetin you dey do? Tell us...",signup_now:"✅ JOIN NOW - I GO SHOW FOR PUBLIC",back_home:"⬅️ GO BACK HOUSE",chat_with:"💬 GIST WITH",type_msg:"Type message...",send_inside:"SEND MESSAGE FOR INSIDE APP",back:"⬅️ BACK",your_name:"Your name na wetin?",you_be:"You be Artist, Content, Barber, Tailor?",filter_label:"Choose work"},
-yo:{hdr:"ONISE AWORAN • CONTENT • AGBERUN • TAILOR • GBOGBO ENIYAN",everybody:"Gbogbo Eniyan",artist:"Onise Aworan",content:"Content Creator",barber:"Agberun",tailor:"Tailor",home:"ILE",signup:"FORUKO SILO",share:"PIN",filter_all:"Gbogbo",public_title:"PUBLIC APP - PIN FUN GBOGBO ENIYAN",public_desc:"Onise aworan wa, Content wa, Agberun wa - gbogbo eniyan yoo han nibi!",share_btn:"📤 PIN APP LINK",every_title:"Gbogbo Eniyan",no_person:"Ko si eniyan fun",be_first:"Iwo ni akoko!",chat_btn:"💬 BA SORO PELU",inside:"NINU APP",public_gist:"💬 GBOGBO ENIYAN NSORO",type_public:"Ko nkan fun gbogbo eniyan...",send_public:"RANSE SI GBOGBO ENIYAN",signup_title:"📝 FORUKO SILO - GBOGBO NKAN WA NIBI",signup_desc:"Onise aworan, Content, Agberun, Tailor - Yan ise re!",name_ph:"Oruko re ni kikun",phone_ph:"Nomba Foonu - 080...",location_ph:"Ibi ti o wa - Lagos, Abuja",photo_ph:"Linki Fọto",bio_ph:"Kini ise re?",signup_now:"✅ FORUKO SILO BAYI",back_home:"⬅️ PADA SI ILE",chat_with:"💬 BA SORO PELU",type_msg:"Ko ifiranse...",send_inside:"RANSE NINU APP",back:"⬅️ PADA",your_name:"Oruko re?",you_be:"Ise wo ni tire?",filter_label:"Yan ise"},
-ig:{hdr:"ARTIST • CONTENT • BARBER • TAILOR • MMADU NILE",everybody:"Madu Nile",artist:"Artist",content:"Content Creator",barber:"Barber",tailor:"Tailor",home:"ULO",signup:"DEBANYE AHA",share:"KESAA",filter_all:"Nile",public_title:"PUBLIC APP - KESAA MEE MMADU NILE",public_desc:"Artist no, Content no, Barber, Tailor - onye obula ga-aputa ebe a!",share_btn:"📤 KESAA APP LINK",every_title:"Madu Nile",no_person:"Onweghi onye maka",be_first:"Burụ onye mbu!",chat_btn:"💬 KPAKORITA",inside:"N'IME APP",public_gist:"💬 MKPARITA NILE - MMADU NILE",type_public:"Dee ihe maka mmadu nile...",send_public:"ZIPU MAKA NDI NILE",signup_title:"📝 DEBANYE AHA - IHE NILE DI EBE A",signup_desc:"Artist, Content, Barber, Tailor - Họrọ ọrụ gi!",name_ph:"Aha gi n'uju",phone_ph:"Nomba ekwenti - 080...",location_ph:"Ebe i bi - Lagos, Abuja",photo_ph:"Link foto",bio_ph:"Kedu ọrụ i na-aru?",signup_now:"✅ DEBANYE AHA UGBU A",back_home:"⬅️ LAGHACHI ULO",chat_with:"💬 KPAKORITA",type_msg:"Dee ozi...",send_inside:"ZIPU OZI N'IME APP",back:"⬅️ LAGHACHI",your_name:"Aha gi?",you_be:"I bu Artist, Content, Barber, Tailor?",filter_label:"Họrọ ọrụ"},
-ha:{hdr:"MAI ZANE • CONTENT • MAI ASKI • TAILOR • KOWA",everybody:"Kowa",artist:"Mai Zane",content:"Content Creator",barber:"Mai Aski",tailor:"Tailor",home:"GIDA",signup:"YI RAJISTA",share:"RABA",filter_all:"Duka",public_title:"PUBLIC APP - RABA GA KOWA",public_desc:"Mai zane yana, Content yana, Mai aski, Tailor - kowa zai bayyana anan!",share_btn:"📤 RABA LINK DIN APP",every_title:"Kowa",no_person:"Babu kowa don",be_first:"Ka zama na farko!",chat_btn:"💬 YI HIRA DA",inside:"CIKIN APP",public_gist:"💬 HIRAR JAMA'A - KOWA",type_public:"Rubuta hirar jama'a...",send_public:"AIKA GA JAMA'A",signup_title:"📝 YI RAJISTA - KOWA YANA NAN",signup_desc:"Mai zane, Content, Mai aski, Tailor - Zabi aikinka!",name_ph:"Cikakken sunanka",phone_ph:"Lambar Waya - 080...",location_ph:"Wurinka - Lagos, Abuja",photo_ph:"Link din hoto",bio_ph:"Me kake yi?",signup_now:"✅ YI RAJISTA YANZU",back_home:"⬅️ KOMA GIDA",chat_with:"💬 YI HIRA DA",type_msg:"Rubuta sako...",send_inside:"AIKA SAKO CIKIN APP",back:"⬅️ KOMA",your_name:"Sunanka?",you_be:"Kai Artist ne, Content, Barber, Tailor?",filter_label:"Zabi aiki"}
-};
-function t(k){return dict[curLang][k]||dict['en'][k]||k}
-function setLang(l){curLang=l; localStorage.setItem('ng_lang',l); document.querySelectorAll('.lang-bar button').forEach(b=>b.classList.remove('active')); document.getElementById('btn-'+l).classList.add('active'); applyLang(); renderHome();}
-function applyLang(){document.getElementById('hdr_sub').innerText=t('hdr'); document.getElementById('top_bar').innerText='🔥 '+t('filter_label').toUpperCase()+' - PEOPLE FIT CHANGE LANGUAGE - '+curLang.toUpperCase()+' 🔥'; document.getElementById('nav_home').innerText=t('home'); document.getElementById('nav_signup').innerText=t('signup'); document.getElementById('nav_share').innerText=t('share');}
 
-let workers = JSON.parse(localStorage.getItem('ng_lang_final')||'[{"name":"OLA - ARTIST","work":"Artist","location":"Sagamu","phone":"080...","bio":"Professional Artist - draw, paint, design","photo":"","cat":"Artist"},{"name":"Tolu - CONTENT","work":"Content Creator","location":"Lagos","phone":"081...","bio":"Content creator TikTok Instagram YouTube","photo":"","cat":"Content"},{"name":"Baba Barbing","work":"Barber","location":"Ikeja","phone":"080...","bio":"Sharp barbing clean cut","photo":"","cat":"Barber"},{"name":"Mama Tailor","work":"Tailor","location":"Abeokuta","phone":"090...","bio":"Sew native English aso-ebi","photo":"","cat":"Tailor"}]');
-let chats = JSON.parse(localStorage.getItem('ng_lang_chat')||'{}');
-let currentFilter='All';
-function save(){localStorage.setItem('ng_lang_final',JSON.stringify(workers));localStorage.setItem('ng_lang_chat',JSON.stringify(chats))}
-function showPage(p){if(p==='home')renderHome();if(p==='signup')renderSignup()}
+<script>
+let curLang = localStorage.getItem('ngm_lang')||'en';
+let dict={
+en:{whats:"What's on your mind?",write:"Write something...",create:"Create story",post:"Post",people:"People who signed up",noPeople:"No people yet - Be the first to sign up! Only real people appear here like Facebook",addFriend:"Add",like:"Like",comment:"Comment",share:"Share",likes:"likes",noPost:"No posts yet. Tap + to create first post like Facebook!"},
+pg:{whats:"Wetin dey your mind?",write:"Write something...",create:"Create story",post:"Post",people:"People wey don sign up",noPeople:"No people yet - Na you go first!",addFriend:"Add",like:"Like",comment:"Comment",share:"Share",likes:"likes",noPost:"No post yet. Press + make you post first!"},
+yo:{whats:"Kini o wa lori okan re?",write:"Ko nkan...",create:"Da itan",post:"Firanse",people:"Eniyan",noPeople:"Ko si eniyan",addFriend:"Fi kun",like:"Feran",comment:"Asọye",share:"Pin",likes:"feran",noPost:"Ko si post sibẹsibẹ"},
+ig:{whats:"Gini di n'obi gi?",write:"Dee ihe...",create:"Mepụta akụkọ",post:"Bipụta",people:"Ndi mmadu",noPeople:"Onweghi onye",addFriend:"Tinye",like:"Masịrị",comment:"Ikwu",share:"Kekọrịta",likes:"masịrị",noPost:"Onwebeghi post"},
+ha:{whats:"Me ke cikin zuciyarka?",write:"Rubuta...",create:"Kirkiro labari",post:"Buga",people:"Mutane",noPeople:"Babu mutane",addFriend:"Ara",like:"So",comment:"Sharhi",share:"Raba",likes:"so",noPost:"Babu post tukuna"}
+};
+function t(k){return (dict[curLang]&&dict[curLang][k])||dict['en'][k]||k}
+function setLang(l){curLang=l; localStorage.setItem('ngm_lang',l); document.querySelectorAll('.lang-strip button').forEach(b=>b.classList.remove('active')); document.getElementById('l-'+l).classList.add('active'); showPage(currentPage)}
+
+let users = JSON.parse(localStorage.getItem('ngm_users_final')||'[]');
+let posts = JSON.parse(localStorage.getItem('ngm_posts_final')||'[]');
+let currentUser = JSON.parse(localStorage.getItem('ngm_current_final')||'null');
+let currentPage='home';
+function save(){localStorage.setItem('ngm_users_final',JSON.stringify(users));localStorage.setItem('ngm_posts_final',JSON.stringify(posts));if(currentUser)localStorage.setItem('ngm_current_final',JSON.stringify(currentUser))}
+
+function showPage(p){
+currentPage=p;
+document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
+document.getElementById('nav_'+p).classList.add('active');
+if(p==='home')renderHome();
+if(p==='people')renderPeople();
+if(p==='create')renderCreate();
+if(p==='profile')renderProfile();
+}
+
 function renderHome(){
-let cats = ['All','Artist','Content','Barber','Tailor','Fashion Designer','Makeup Artist','Photographer','Plumber','Electrician','Carpenter','Painter','DJ','Others'];
-let html=`<div class="share-box"><h2 style="font-size:24px">${t('public_title')}</h2><p style="font-size:18px;font-family:Arial;margin:8px 0">${t('public_desc')}</p><button class="btn btn-yellow" onclick="shareApp()">${t('share_btn')}</button></div>`;
-html+=`<div class="filter-bar">`+cats.map(c=>`<button class="${currentFilter===c?'active':''}" onclick="filterCat('${c}')">${c==='All'?t('filter_all'):c.toUpperCase()}</button>`).join('')+`</div>`;
-let filtered = currentFilter==='All'?workers:workers.filter(w=>w.cat===currentFilter||w.work===currentFilter);
-html+=`<h2 style="font-size:26px;margin:14px 0">👥 ${t('every_title')} (${filtered.length}) - ${currentFilter.toUpperCase()}</h2>`;
-if(filtered.length===0)html+=`<div style="padding:40px;text-align:center;font-size:22px;border:4px dashed #4E342E;border-radius:22px">${t('no_person')} ${currentFilter}. ${t('be_first')}</div>`;
-filtered.slice().reverse().forEach(w=>{
- let realIdx=workers.indexOf(w);
- html+=`<div class="card"><img src="${w.photo||'https://via.placeholder.com/600x600/4E342E/FFD54F?text='+encodeURIComponent(w.name)}"><div class="card-body"><span class="tag">✨ ${w.cat||w.work}</span><h2>${w.name}</h2><p>🔧 <b>${w.work.toUpperCase()}</b></p><p>📍 ${w.location}</p><p>📞 ${w.phone}</p><p>📝 ${w.bio}</p><button class="btn" onclick="openChat(${realIdx})">${t('chat_btn')} ${w.name.split(' ')[0].toUpperCase()} ${t('inside')}</button></div></div>`;
+let userImg = currentUser&&currentUser.photo?currentUser.photo:'https://via.placeholder.com/100/1877F2/FFFFFF?text=U';
+let html=`
+<div class="card"><div class="create-box"><img src="${userImg}"><button onclick="showPage('create')">${t('whats')} ${currentUser?currentUser.name.split(' ')[0]:''}</button><span>📷</span></div></div>
+<div class="card"><div class="story-row">
+<div class="story" onclick="showPage('create')"><div class="story-img"><div>➕</div></div><p>${t('create')}</p></div>
+${users.slice(0,10).map(u=>`<div class="story"><div class="story-img"><img src="${u.photo||'https://via.placeholder.com/100/1877F2/FFFFFF?text='+encodeURIComponent(u.name[0])}"></div><p>${u.name.split(' ')[0]}</p></div>`).join('')}
+</div></div>
+`;
+if(posts.length===0)html+=`<div class="empty"><h3>${t('noPost')}</h3><p style="margin-top:8px">Only real people wey sign up go dey here. No bot.</p></div>`;
+posts.slice().reverse().forEach((po,i)=>{
+ let idx=posts.length-1-i;
+ let u=users.find(x=>x.phone===po.phone)||po;
+ html+=`<div class="card">
+<div class="post-head"><img src="${u.photo||'https://via.placeholder.com/100/1877F2/FFFFFF?text='+encodeURIComponent((u.name||'U')[0])}"><div class="post-head-info"><b>${u.name}</b><p>${po.work||u.work||''} • ${po.location||u.location||''} • ${new Date(po.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})} • 🌎</p></div><div>•••</div></div>
+<div class="post-text">${po.text}</div>
+${po.image?`<img class="post-img" src="${po.image}">`:''}
+<div class="post-stats"><span>👍 ${po.likes||0} ${t('likes')}</span><span>${po.comments||0} comments</span></div>
+<div class="post-actions"><button onclick="likePost(${idx})">👍 ${t('like')}</button><button>💬 ${t('comment')}</button><button>↗️ ${t('share')}</button></div>
+</div>`;
 });
-html+=`<div style="margin-top:18px"><h2 style="font-size:24px">${t('public_gist')}</h2><div class="chat-box" id="publicBox"></div><input id="publicInput" placeholder="${t('type_public')}"><button class="btn" onclick="sendPublic()">${t('send_public')}</button></div>`;
-document.getElementById('app').innerHTML=html; renderPublic();
+document.getElementById('app').innerHTML=html;
 }
-function filterCat(c){currentFilter=c; renderHome()}
-function renderSignup(){
-document.getElementById('app').innerHTML=`<div style="background:#FFF8E1;border:4px solid #4E342E;padding:20px;border-radius:22px"><h2 style="font-size:30px">${t('signup_title')}</h2><p style="font-size:18px;font-family:Arial;margin:10px 0">${t('signup_desc')}</p><input id="s_name" placeholder="${t('name_ph')}"><input id="s_phone" placeholder="${t('phone_ph')}"><select id="s_work"><option value="Artist">🎨 ${t('artist')}</option><option value="Content">🎥 ${t('content')}</option><option value="Barber">✂️ ${t('barber')}</option><option value="Tailor">👗 ${t('tailor')}</option><option value="Fashion Designer">👚 Fashion Designer</option><option value="Makeup Artist">💄 Makeup Artist</option><option value="Photographer">📸 Photographer</option><option value="Plumber">🔧 Plumber</option><option value="Electrician">💡 Electrician</option><option value="Carpenter">🪚 Carpenter</option><option value="Painter">🎨 Painter</option><option value="DJ">🎧 DJ / MC</option><option value="Others">⭐ Others</option></select><input id="s_location" placeholder="${t('location_ph')}"><input id="s_photo" placeholder="${t('photo_ph')}"><textarea id="s_bio" placeholder="${t('bio_ph')}"></textarea><button class="btn btn-green" onclick="doSignup()">${t('signup_now')}</button><button class="btn btn-outline" onclick="showPage('home')">${t('back_home')}</button></div>`;
+
+function renderPeople(){
+let html=`<div class="card" style="padding:12px"><b>${t('people')} (${users.length})</b><p style="font-size:12px;color:#65676B;margin-top:4px">${t('noPeople')}</p></div>`;
+if(users.length===0)html+=`<div class="empty"><h3>No people yet</h3><p>Be first to sign up - No bot, only real people like Facebook</p><button class="btn-blue" onclick="openSignup()">Sign Up Now</button></div>`;
+users.slice().reverse().forEach(u=>{
+ html+=`<div class="people-card"><img src="${u.photo||'https://via.placeholder.com/100/1877F2/FFFFFF?text='+encodeURIComponent(u.name[0])}"><div class="people-info"><b>${u.name}</b><p>${u.work} • ${u.location}</p><p>${u.bio||''}</p></div><button>${t('addFriend')}</button></div>`;
+});
+document.getElementById('app').innerHTML=html;
 }
+
+function renderCreate(){
+if(!currentUser){document.getElementById('app').innerHTML=`<div class="empty"><h3>Please Sign Up First</h3><p>Only real people wey sign up fit post - Like Facebook</p><button class="btn-blue" onclick="openSignup()">Sign Up</button><button class="btn-gray" onclick="openLogin()">Log In</button></div>`;return}
+document.getElementById('app').innerHTML=`<div class="card" style="padding:12px">
+<div style="display:flex;gap:10px;align-items:center"><img src="${currentUser.photo||'https://via.placeholder.com/100/1877F2/FFFFFF?text=U'}" style="width:40px;height:40px;border-radius:50%"><b>${currentUser.name}</b><span style="background:#E4E6EB;padding:4px 8px;border-radius:4px;font-size:12px">🌎 Public</span></div>
+<textarea id="post_text" placeholder="${t('whats')} ${currentUser.name}?" style="width:100%;height:140px;margin:12px 0;border:none;font-size:18px;resize:none;outline:none" autofocus></textarea>
+<input id="post_img" placeholder="Paste photo link here to add photo like Facebook - e.g. https://..." style="width:100%;padding:12px;background:#F0F2F5;border:none;border-radius:8px">
+<p style="font-size:11px;color:#65676B;margin:6px 0">How to add photo like Facebook: Go Google Images, copy image link, paste here</p>
+<div style="margin-top:12px;border:1px solid #E4E6EB;border-radius:8px;padding:10px;display:flex;justify-content:space-between"><span>Add to your post</span><span>📷 🎥 😊 📍</span></div>
+<button class="btn-blue" onclick="doPost()">${t('post')}</button><button class="btn-gray" onclick="showPage('home')">Cancel</button>
+</div>`;
+}
+
+function renderProfile(){
+if(!currentUser){document.getElementById('app').innerHTML=`<div class="empty"><h3>No profile yet</h3><button class="btn-blue" onclick="openSignup()">Sign Up</button></div>`;return}
+let myPosts = posts.filter(p=>p.phone===currentUser.phone);
+document.getElementById('app').innerHTML=`
+<div class="card" style="padding:0">
+<div style="height:180px;background:linear-gradient(#1877F2,#42A5F5)"></div>
+<div style="padding:0 16px 16px">
+<img src="${currentUser.photo||'https://via.placeholder.com/120/1877F2/FFFFFF?text='+encodeURIComponent(currentUser.name[0])}" style="width:90px;height:90px;border-radius:50%;border:4px solid #fff;margin-top:-45px;background:#fff">
+<h2>${currentUser.name}</h2><p>${currentUser.work} • ${currentUser.location}</p>
+<p style="margin:8px 0;color:#050505">${currentUser.bio||''}</p>
+<div style="display:flex;gap:8px;margin-top:12px"><button class="btn-blue" style="flex:1">➕ Add to Story</button><button class="btn-gray" style="flex:1">✏️ Edit Profile</button></div>
+<button class="btn-gray" onclick="logout()">Log Out</button>
+</div>
+</div>
+<div class="card" style="padding:12px"><b>Posts (${myPosts.length}) • Friends (${users.length-1}) • Only real people</b></div>
+${myPosts.reverse().map(p=>`<div class="card"><div style="padding:12px">${p.text}${p.image?`<img src="${p.image}" style="width:100%;margin-top:8px;border-radius:8px">`:''}</div></div>`).join('')}
+`;
+}
+
+function openSignup(){
+document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="modal"><div class="modal-box"><h2>Create Account</h2><p>Only real people who sign up will appear here, just like Facebook. No bots.</p><input id="su_name" placeholder="Full Name"><input id="su_phone" placeholder="Phone - 080... (you will use this to login)"><select id="su_work"><option>Artist</option><option>Content Creator</option><option>Barber</option><option>Tailor</option><option>Fashion Designer</option><option>Makeup Artist</option><option>Photographer</option><option>Plumber</option><option>Electrician</option><option>Carpenter</option><option>DJ</option><option>Others</option></select><input id="su_location" placeholder="Location - Lagos, Abuja, etc"><input id="su_photo" placeholder="Profile Photo Link - paste image link"><textarea id="su_bio" placeholder="Bio - What do you do? Artist, Barber, Tailor..." style="height:70px"></textarea><button class="btn-blue" onclick="doSignup()">Sign Up</button><button class="btn-gray" onclick="closeModal()">Cancel</button></div></div>`);
+}
+function openLogin(){
+document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="modal"><div class="modal-box"><h2>Log In</h2><p>Enter your phone number</p><input id="li_phone" placeholder="080..."><button class="btn-blue" onclick="doLogin()">Continue</button><button class="btn-gray" onclick="closeModal()">Cancel</button></div></div>`);
+}
+function closeModal(){let m=document.getElementById('modal'); if(m)m.remove()}
 function doSignup(){
-let workVal=document.getElementById('s_work').value;
-let w={name:document.getElementById('s_name').value,phone:document.getElementById('s_phone').value,work:workVal,cat:workVal,location:document.getElementById('s_location').value||'Nigeria',photo:document.getElementById('s_photo').value,bio:document.getElementById('s_bio').value};
-if(!w.name||!w.phone){alert('Fill Name and Phone! / Abeg fill Name and Phone!');return} workers.push(w); save(); alert('PERFECT! / Oya you don join! You don dey PUBLIC!'); showPage('home');
+let u={name:document.getElementById('su_name').value.trim(),phone:document.getElementById('su_phone').value.trim(),work:document.getElementById('su_work').value,location:document.getElementById('su_location').value||'Nigeria',photo:document.getElementById('su_photo').value.trim(),bio:document.getElementById('su_bio').value.trim()};
+if(!u.name||!u.phone){alert('Fill name and phone');return}
+if(users.find(x=>x.phone===u.phone)){alert('Phone already exists, please log in');return}
+users.push(u); currentUser=u; save(); closeModal(); showPage('home');
 }
-function openChat(i){let w=workers[i];currentChat=i;document.getElementById('app').innerHTML=`<div class="card"><div class="card-body"><button class="btn btn-outline" onclick="showPage('home')">${t('back')}</button><h2>${t('chat_with')} ${w.name}</h2><p><span class="tag">${w.work}</span> 📍 ${w.location}</p><div class="chat-box" id="chatBox"></div><input id="chatInput" placeholder="${t('type_msg')}"><button class="btn" onclick="sendMsg()">${t('send_inside')}</button></div></div>`; renderChat();}
-function renderChat(){let box=document.getElementById('chatBox'); if(!box)return; let key='chat_'+currentChat; let msgs=chats[key]||[]; box.innerHTML=msgs.map(m=>`<div style="padding:14px;margin:10px 0;background:${m.me?'#4E342E':'#fff'};color:${m.me?'#fff':'#3E2723'};border-radius:14px;border:3px solid #4E342E;font-size:21px;font-family:Arial">${m.text}</div>`).join(''); box.scrollTop=box.scrollHeight}
-function sendMsg(){let inp=document.getElementById('chatInput'); if(!inp.value)return; let key='chat_'+currentChat; if(!chats[key])chats[key]=[]; chats[key].push({text:inp.value,me:true}); setTimeout(()=>{chats[key].push({text:'Thanks! I be '+workers[currentChat].work+' for '+workers[currentChat].location,me:false}); save(); renderChat();},800); inp.value=''; save(); renderChat();}
-let publicChats=JSON.parse(localStorage.getItem('ng_public_lang_chat')||'[]');
-function renderPublic(){let box=document.getElementById('publicBox'); if(!box)return; box.innerHTML=publicChats.map(m=>`<div style="padding:12px;margin:8px 0;background:#fff;border:3px solid #4E342E;border-radius:12px;font-size:19px;font-family:Arial"><b>${m.name}:</b> ${m.text}</div>`).join(''); box.scrollTop=box.scrollHeight}
-function sendPublic(){let inp=document.getElementById('publicInput'); if(!inp.value)return; let name=prompt(t('your_name'))||'Guest'; publicChats.push({name:name,text:inp.value}); localStorage.setItem('ng_public_lang_chat',JSON.stringify(publicChats)); inp.value=''; renderPublic();}
-function shareApp(){let link='https://sundizzy064a-ux.github.io/naija-work-connect/'; if(navigator.share){navigator.share({title:'NG MEET',text:t('public_desc'),url:link})} else {prompt('Copy link:',link)}}
-applyLang(); renderHome();
+function doLogin(){
+let ph=document.getElementById('li_phone').value.trim();
+let u=users.find(x=>x.phone===ph);
+if(!u){alert('Account not found, please sign up');return}
+currentUser=u; save(); closeModal(); showPage('home');
+}
+function logout(){currentUser=null; localStorage.removeItem('ngm_current_final'); showPage('home')}
+function doPost(){
+let text=document.getElementById('post_text').value.trim();
+let img=document.getElementById('post_img').value.trim();
+if(!text&&!img){alert('Write something or add photo');return}
+posts.push({name:currentUser.name,phone:currentUser.phone,work:currentUser.work,location:currentUser.location,photo:currentUser.photo,text:text,image:img,time:Date.now(),likes:0,comments:0});
+save(); showPage('home');
+}
+function likePost(i){posts[i].likes=(posts[i].likes||0)+1; save(); renderHome()}
+
+showPage('home');
 </script>
 </body>
 </html>

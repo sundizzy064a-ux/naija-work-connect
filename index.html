@@ -1,179 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NG Meet - Brown & White - Big</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<meta property="og:image" content="https://sundizzy064a-ux.github.io/naija-work-connect/logo.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NG Meet - Real People Only</title>
 <style>
-body{background:#FFFEF9;color:#3E2723;font-family:Inter,system-ui}
-.brown{background:#6D4C41;color:#fff}
-.brown-light{background:#EFEBE9;border:1px solid #D7CCC8}
-.brown-card{background:#fff;border:2px solid #D7CCC8;box-shadow:0 4px 20px rgba(109,76,65,0.1)}
-.live-dot{width:10px;height:10px;background:#6D4C41;border-radius:50%;animation:pulse 1.5s infinite;display:inline-block}
-@keyframes pulse{0%{box-shadow:0 0 0 0 #6D4C41}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.logo-ng{width:50px;height:50px;background:#6D4C41;border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:22px}
-.big-text{font-size:16px}
-.bigger-text{font-size:18px;font-weight:700}
-.huge-text{font-size:22px;font-weight:900}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #fff; color: #3E2723; padding-bottom: 80px; }
+.header { background: #5D4037; color: white; padding: 18px; text-align: center; position: sticky; top:0; z-index: 10; }
+.header h1 { font-size: 32px; letter-spacing: 1px; }
+.header p { font-size: 18px; margin-top: 5px; opacity: 0.9; }
+.real-badge { background: #FFD54F; color: #3E2723; padding: 10px; text-align: center; font-weight: bold; font-size: 19px; }
+.container { padding: 15px; max-width: 600px; margin: auto; }
+.card { background: white; border: 3px solid #5D4037; border-radius: 18px; margin-bottom: 22px; overflow: hidden; box-shadow: 0 4px 10px rgba(93,64,55,0.2); }
+.card img { width: 100%; height: 320px; object-fit: cover; background: #EFEBE9; }
+.card-body { padding: 16px; }
+.card-body h2 { font-size: 28px; color: #3E2723; }
+.card-body p { font-size: 20px; margin: 6px 0; line-height: 1.4; }
+.btn { background: #5D4037; color: white; border: none; padding: 16px; width: 100%; border-radius: 12px; font-size: 22px; font-weight: bold; margin-top: 12px; }
+.btn-green { background: #2E7D32; }
+.btn-outline { background: white; color: #5D4037; border: 3px solid #5D4037; }
+input, select, textarea { width: 100%; padding: 18px; margin: 10px 0; border: 3px solid #5D4037; border-radius: 12px; font-size: 20px; }
+.form-box { background: #FFF8E1; border: 3px dashed #5D4037; padding: 18px; border-radius: 18px; margin-bottom: 20px; }
+.chat-box { border: 3px solid #5D4037; height: 280px; overflow-y: auto; padding: 12px; border-radius: 12px; background: #FAFAFA; margin: 10px 0; }
+.admin-bar { background: #3E2723; color: white; padding: 12px; text-align: center; position: fixed; bottom: 0; width: 100%; max-width: 600px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+.admin-bar button { flex: 1; padding: 14px; border-radius: 10px; border: none; font-weight: bold; font-size: 16px; }
 </style>
 </head>
 <body>
-<header class="sticky top-0 z-50 bg-white border-b-4 border-[#6D4C41] p-4 shadow-lg">
-<div class="max-w-6xl mx-auto flex justify-between items-center">
-<div class="flex items-center gap-4"><div class="logo-ng">NG</div><div><h1 class="huge-text text-[#6D4C41]">NG FUN MEET</h1><div class="big-text text-[#6D4C41] flex items-center gap-2 font-bold"><span class="live-dot"></span><span id="count">BROWN & WHITE • BIG • PERFECT</span></div></div></div>
-<button id="joinBtn" onclick="openJoin()" class="brown px-8 py-3 rounded-full font-black text-lg shadow-lg">+ JOIN</button>
-<button id="outBtn" onclick="logout()" class="hidden bg-[#EFEBE9] border-2 border-[#6D4C41] text-[#6D4C41] px-6 py-3 rounded-full font-bold">LOGOUT</button>
+<div class="header">
+<h1>🤎 NG MEET 🤎</h1>
+<p>Real Workers Only - Lagos</p>
 </div>
-<div class="max-w-6xl mx-auto flex gap-3 mt-4">
-<button onclick="showTab('people')" id="tabP" class="brown px-6 py-3 rounded-full font-black text-base">👥 PEOPLE</button>
-<button onclick="showTab('chat')" id="tabC" class="brown-light text-[#6D4C41] px-6 py-3 rounded-full font-bold text-base">💬 PUBLIC GIST</button>
-</div>
-</header>
+<div class="real-badge">✅ REAL PEOPLE ONLY - NO FAKE - HOME ADDRESS NEEDED</div>
 
-<div class="max-w-6xl mx-auto p-4 pb-32">
-<div id="peopleTab"><div id="grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div></div>
-<div id="chatTab" class="hidden">
-<div class="brown-card rounded-3xl p-5 mb-4"><p class="bigger-text text-[#6D4C41]"><span class="live-dot"></span> PUBLIC GIST ROOM - BIG LETTERS, BROWN & WHITE, PERFECT!</p><p class="big-text">Everybody wey join dey see am LIVE inside app!</p></div>
-<div id="publicChats" class="space-y-4 max-h-[60vh] overflow-y-auto p-2"></div>
-</div>
-</div>
+<div class="container" id="app"></div>
 
-<div id="publicInput" class="fixed bottom-0 left-0 right-0 max-w-6xl mx-auto p-4 bg-white border-t-4 border-[#6D4C41] flex gap-3 z-30 shadow-2xl">
-<input id="pChatInput" placeholder="Type PUBLIC gist... BIG LETTERS! Everybody go see am!" class="flex-1 bg-[#EFEBE9] border-2 border-[#6D4C41] rounded-full px-6 py-4 text-lg font-bold outline-none text-[#3E2723]">
-<button onclick="sendPublic()" class="brown w-16 h-16 rounded-full text-xl"><i class="fa fa-paper-plane"></i></button>
-</div>
-
-<div id="joinModal" class="fixed inset-0 bg-[#6D4C41]/90 z-50 flex items-center justify-center p-4">
-<div class="bg-white w-full max-w-md rounded-3xl p-8 border-4 border-[#6D4C41] text-center shadow-2xl">
-<div class="logo-ng mx-auto mb-4 w-20 h-20 text-3xl">NG</div>
-<h3 class="huge-text text-[#6D4C41]">JOIN NOW - PERFECT!</h3><p class="big-text text-[#6D4C41]/70 mb-6 font-bold">Brown & White • Big Letters • Fun!</p>
-<div class="space-y-4 text-left">
-<div class="flex justify-center">
-<label class="w-28 h-28 rounded-full bg-[#EFEBE9] border-4 border-[#6D4C41] border-dashed flex flex-col items-center justify-center cursor-pointer overflow-hidden">
-<input type="file" id="photoInput" accept="image/*" class="hidden" onchange="loadPhoto(event)">
-<span id="photoPlaceholder" class="font-bold text-[#6D4C41]">📸<br>BIG PHOTO</span>
-<img id="photoPreview" class="hidden w-full h-full object-cover">
-</label>
-</div>
-<input id="name" placeholder="YOUR BIG NAME e.g. WALE" class="w-full bg-[#EFEBE9] border-2 border-[#6D4C41] rounded-full px-6 py-4 text-lg font-bold outline-none">
-<select id="loc" class="w-full bg-[#EFEBE9] border-2 border-[#6D4C41] rounded-full px-6 py-4 text-lg font-bold"><option>SAGAMU</option><option>IKENNE</option><option>REMO</option><option>LAGOS</option><option>ABEOKUTA</option><option>EVERYWHERE</option></select>
-<input id="vibe" placeholder="YOUR BIG VIBE! e.g. FUN, ARTS, CONTENT!" class="w-full bg-[#EFEBE9] border-2 border-[#6D4C41] rounded-full px-6 py-4 text-lg font-bold outline-none">
-<button onclick="join()" class="w-full brown py-4 rounded-full font-black text-xl shadow-lg">JOIN NOW - BIG & PERFECT!</button>
-</div>
-</div>
-</div>
-
-<div id="chatModal" class="fixed inset-0 bg-white z-50 hidden flex flex-col">
-<div class="p-4 border-b-4 border-[#6D4C41] flex items-center gap-4 bg-[#EFEBE9]">
-<button onclick="closeChat()" class="w-12 h-12 rounded-full brown flex items-center justify-center text-xl"><i class="fa fa-arrow-left"></i></button>
-<img id="cPhoto" src="" class="w-14 h-14 rounded-full object-cover border-3 border-[#6D4C41]">
-<div><h3 id="cName" class="bigger-text text-[#6D4C41]"></h3><p class="big-text text-[#6D4C41] font-bold flex items-center gap-2"><span class="live-dot"></span>ONLINE - CHAT INSIDE APP - BIG!</p></div>
-</div>
-<div id="cMessages" class="flex-1 overflow-y-auto p-5 space-y-4 bg-[#FFFEF9]"></div>
-<div class="p-4 bg-white border-t-4 border-[#6D4C41] flex gap-3">
-<input id="cInput" onkeypress="if(event.key==='Enter')sendPrivate()" placeholder="Type BIG message... inside app!" class="flex-1 bg-[#EFEBE9] border-2 border-[#6D4C41] rounded-full px-6 py-4 text-lg font-bold outline-none">
-<button onclick="sendPrivate()" class="brown w-16 h-16 rounded-full text-xl"><i class="fa fa-paper-plane"></i></button>
-</div>
+<div class="admin-bar">
+<button onclick="showPage('home')" style="background:white;color:#3E2723;">HOME</button>
+<button onclick="showPage('signup')" style="background:#FFD54F;color:#3E2723;">SIGN UP</button>
+<button onclick="showPage('admin')" style="background:#D32F2F;color:white;">ADMIN</button>
 </div>
 
 <script>
-let me=JSON.parse(localStorage.getItem('ng_brown_me')||'null');
-let people=JSON.parse(localStorage.getItem('ng_brown_people')||'null')||[
-{name:"WALE",loc:"SAGAMU",vibe:"FUN GUY - LOVE ARTS & MUSIC! BIG VIBE!",photo:"https://api.dicebear.com/7.x/avataaars/svg?seed=WALE",time:Date.now()},
-{name:"AMAKA",loc:"SAGAMU",vibe:"CONTENT CREATOR - BIG ENERGY!",photo:"https://api.dicebear.com/7.x/avataaars/svg?seed=AMAKA",time:Date.now()},
-{name:"TUNDE",loc:"REMO",vibe:"NO STRESS - JUST BIG FUN!",photo:"https://api.dicebear.com/7.x/avataaars/svg?seed=TUNDE",time:Date.now()}
-];
-let publicChats=JSON.parse(localStorage.getItem('ng_brown_public')||'[]');
-let privateChats=JSON.parse(localStorage.getItem('ng_brown_private')||'{}');
-let currentChatWith=null;
+let workers = JSON.parse(localStorage.getItem('ng_real')||'[]');
+let chats = JSON.parse(localStorage.getItem('ng_chat')||'{}');
+let currentChat = null;
 
-function loadPhoto(e){
- let file=e.target.files[0];if(!file)return;
- let reader=new FileReader();reader.onload=ev=>{
-  document.getElementById('photoPreview').src=ev.target.result;
-  document.getElementById('photoPreview').classList.remove('hidden');
-  document.getElementById('photoPlaceholder').classList.add('hidden');
-  window.tempPhoto=ev.target.result;
- };reader.readAsDataURL(file);
+function save(){ localStorage.setItem('ng_real', JSON.stringify(workers)); localStorage.setItem('ng_chat', JSON.stringify(chats)); }
+
+function showPage(p){
+ if(p==='home') renderHome();
+ if(p==='signup') renderSignup();
+ if(p==='admin') renderAdmin();
 }
-function save(){localStorage.setItem('ng_brown_people',JSON.stringify(people));localStorage.setItem('ng_brown_public',JSON.stringify(publicChats.slice(-100)));localStorage.setItem('ng_brown_private',JSON.stringify(privateChats));if(me)localStorage.setItem('ng_brown_me',JSON.stringify(me));}
-function openJoin(){document.getElementById('joinModal').classList.remove('hidden');}
-function join(){
- let name=document.getElementById('name').value,loc=document.getElementById('loc').value,vibe=document.getElementById('vibe').value;
- if(!name)return alert('PUT BIG NAME!');
- let photo=window.tempPhoto||`https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`;
- let u={name:name.toUpperCase(),loc,vibe:vibe.toUpperCase(),photo,time:Date.now()};
- people.unshift(u);me=u;save();
- document.getElementById('joinModal').classList.add('hidden');
- document.getElementById('joinBtn').classList.add('hidden');
- document.getElementById('outBtn').classList.remove('hidden');
- render();
+
+function renderHome(){
+ let approved = workers.filter(w=>w.approved);
+ let html = `<h2 style="font-size:28px;margin:15px 0;">👷 Approved Workers (${approved.length})</h2>`;
+ if(approved.length===0) html+=`<div style="padding:40px;text-align:center;font-size:22px;">No worker yet. Make them sign up first, you go approve for Admin.</div>`;
+ approved.forEach((w,i)=>{
+   let idx = workers.indexOf(w);
+   html+=`<div class="card">
+   <img src="${w.photo||'https://via.placeholder.com/400x400/5D4037/FFFFFF?text='+w.name}">
+   <div class="card-body">
+   <h2>${w.name} ${w.approved?'✅':''}</h2>
+   <p>🔧 <b>${w.work}</b></p>
+   <p>📍 ${w.address}</p>
+   <p>📞 ${w.phone}</p>
+   <button class="btn" onclick="openChat(${idx})">💬 CHAT ${w.name} INSIDE APP</button>
+   </div></div>`;
+ });
+ document.getElementById('app').innerHTML = html;
 }
-function logout(){me=null;localStorage.removeItem('ng_brown_me');location.reload();}
-function showTab(t){
- document.getElementById('peopleTab').classList.toggle('hidden',t!=='people');
- document.getElementById('chatTab').classList.toggle('hidden',t!=='chat');
- document.getElementById('publicInput').classList.toggle('hidden',t!=='chat');
- document.getElementById('tabP').className=t==='people'?'brown px-6 py-3 rounded-full font-black text-base':'brown-light text-[#6D4C41] px-6 py-3 rounded-full font-bold text-base';
- document.getElementById('tabC').className=t==='chat'?'brown px-6 py-3 rounded-full font-black text-base':'brown-light text-[#6D4C41] px-6 py-3 rounded-full font-bold text-base';
- if(t==='chat')renderPublic();
+
+function renderSignup(){
+ document.getElementById('app').innerHTML = `
+ <div class="form-box">
+ <h2 style="font-size:30px;">📝 SIGN UP - REAL PEOPLE ONLY</h2>
+ <p style="font-size:18px;margin:10px 0;">We need your home address to confirm you be real person for Lagos. No fake!</p>
+ <input id="s_name" placeholder="Your Full Name">
+ <input id="s_phone" placeholder="Phone Number - 080...">
+ <input id="s_address" placeholder="Your Home Address - e.g. No 12 Allen Avenue, Ikeja">
+ <select id="s_work"><option>Plumber</option><option>Electrician</option><option>Cleaner</option><option>Carpenter</option><option>Painter</option><option>Tiler</option><option>Driver</option><option>Others</option></select>
+ <input id="s_photo" placeholder="Photo link (or leave empty)">
+ <p style="font-size:16px;color:#BF360C;margin-top:10px;">⚠️ After sign up, Oga go approve you before you go show for public. This is to stop fake people.</p>
+ <button class="btn btn-green" onclick="doSignup()">✅ SIGN UP & WAIT FOR APPROVAL</button>
+ </div>`;
 }
-function render(){
- document.getElementById('grid').innerHTML=people.map((p,i)=>`
- <div onclick="openChat(${i})" class="brown-card rounded-3xl p-5 cursor-pointer hover:shadow-2xl transition">
-  <img src="${p.photo}" class="w-full h-40 object-cover rounded-2xl mb-3 border-4 border-[#D7CCC8]">
-  <div class="flex items-center gap-2"><h3 class="bigger-text text-[#6D4C41]">${p.name} ${me&&p.name===me.name?'(YOU)':''}</h3><span class="live-dot"></span></div>
-  <p class="big-text font-bold text-[#8D6E63]">📍 ${p.loc}</p>
-  <p class="big-text mt-2 font-bold text-[#3E2723]">${p.vibe||'BIG FUN!'}</p>
-  <div class="brown py-3 rounded-full text-center font-black text-base mt-4">💬 BIG CHAT INSIDE APP</div>
- </div>
- `).join('');
- document.getElementById('count').innerText=`${people.length} PEOPLE - BROWN & WHITE - BIG & PERFECT!`;
- if(me){document.getElementById('joinBtn').classList.add('hidden');document.getElementById('outBtn').classList.remove('hidden');document.getElementById('joinModal').classList.add('hidden');}
+
+function doSignup(){
+ let w = { name: document.getElementById('s_name').value, phone: document.getElementById('s_phone').value, address: document.getElementById('s_address').value, work: document.getElementById('s_work').value, photo: document.getElementById('s_photo').value, approved: false };
+ if(!w.name||!w.phone||!w.address){ alert('Abeg fill Name, Phone and Home Address - Na compulsory!'); return; }
+ workers.push(w); save(); alert('You don sign up! Oga go approve you soon. You no go show for public until approval.'); showPage('home');
 }
-function renderPublic(){
- document.getElementById('publicChats').innerHTML=publicChats.map(m=>`
- <div class="brown-card rounded-3xl p-5"><div class="flex gap-3"><div class="w-12 h-12 rounded-full brown flex items-center justify-center font-black text-lg">${m.name[0]}</div><div><div class="bigger-text text-[#6D4C41]">${m.name} • ${m.loc}</div><div class="big-text font-bold mt-1">${m.text}</div><div class="text-sm text-[#8D6E63] mt-1">${new Date(m.time).toLocaleTimeString()}</div></div></div></div>
- `).join('')||`<div class="text-center py-10 bigger-text text-[#8D6E63]">NO PUBLIC GIST YET - BE FIRST TO POST BIG MESSAGE!</div>`;
- let el=document.getElementById('publicChats');el.scrollTop=el.scrollHeight;
+
+function renderAdmin(){
+ let pending = workers.filter(w=>!w.approved);
+ let html = `<h2 style="font-size:28px;">🔑 ADMIN - APPROVE REAL PEOPLE</h2><p style="font-size:18px;">Pending: ${pending.length} people waiting</p>`;
+ workers.forEach((w,i)=>{
+   html+=`<div class="card"><div class="card-body">
+   <h2>${w.name} ${w.approved?'✅ APPROVED':'⏳ PENDING'}</h2>
+   <p>Work: ${w.work}</p><p>Phone: ${w.phone}</p><p>Address: <b>${w.address}</b></p>
+   ${!w.approved?`<button class="btn btn-green" onclick="approve(${i})">✅ APPROVE THIS REAL PERSON</button><button class="btn btn-outline" onclick="removeWorker(${i})">❌ REJECT / FAKE</button>`:`<button class="btn btn-outline" onclick="removeWorker(${i})">Delete</button>`}
+   </div></div>`;
+ });
+ document.getElementById('app').innerHTML = html;
 }
+
+function approve(i){ workers[i].approved=true; save(); renderAdmin(); }
+function removeWorker(i){ if(confirm('Delete?')){ workers.splice(i,1); save(); renderAdmin(); } }
+
 function openChat(i){
- if(!me)return openJoin();
- let p=people[i];if(p.name===me.name)return alert('NA YOU BE THIS - BIG YOU!');
- currentChatWith=p;
- document.getElementById('cPhoto').src=p.photo;
- document.getElementById('cName').innerText=p.name;
- document.getElementById('chatModal').classList.remove('hidden');
- renderPrivate();
+ currentChat=i;
+ let w = workers[i];
+ let html = `<div class="card"><div class="card-body">
+ <button class="btn btn-outline" onclick="showPage('home')">⬅️ Back</button>
+ <h2>💬 Chat with ${w.name}</h2><p>${w.work} - ${w.address}</p>
+ <div class="chat-box" id="chatBox"></div>
+ <input id="chatInput" placeholder="Type message...">
+ <button class="btn" onclick="sendMsg()">Send Message Inside App</button>
+ </div></div>`;
+ document.getElementById('app').innerHTML = html;
+ renderChat();
 }
-function closeChat(){document.getElementById('chatModal').classList.add('hidden');}
-function renderPrivate(){
- if(!currentChatWith)return;
- let key=[me.name,currentChatWith.name].sort().join('_');
- let msgs=privateChats[key]||[];
- document.getElementById('cMessages').innerHTML=msgs.map(m=>`
- <div class="flex ${m.from===me.name?'justify-end':'justify-start'}"><div class="${m.from===me.name?'brown':'brown-light text-[#3E2723]'} rounded-3xl px-6 py-4 max-w-[80%]"><div class="big-text font-bold">${m.text}</div><div class="text-xs opacity-70 mt-1">${new Date(m.time).toLocaleTimeString()}</div></div></div>
- `).join('')||`<div class="text-center py-20 bigger-text text-[#8D6E63]">NO MESSAGE YET WITH ${currentChatWith.name}<br><span class="big-text">START BIG FUN GIST INSIDE APP!</span></div>`;
- let el=document.getElementById('cMessages');el.scrollTop=el.scrollHeight;
+function renderChat(){
+ let box = document.getElementById('chatBox');
+ if(!box) return;
+ let key = 'chat_'+currentChat;
+ let msgs = chats[key]||[];
+ box.innerHTML = msgs.map(m=>`<div style="padding:10px;margin:8px 0;background:${m.me?'#5D4037':'white'};color:${m.me?'white':'#3E2723'};border-radius:12px;border:2px solid #5D4037;font-size:19px;">${m.text}</div>`).join('');
+ box.scrollTop = box.scrollHeight;
 }
-function sendPrivate(){
- let t=document.getElementById('cInput').value;if(!t||!currentChatWith)return;
- let key=[me.name,currentChatWith.name].sort().join('_');
- if(!privateChats[key])privateChats[key]=[];
- privateChats[key].push({from:me.name,to:currentChatWith.name,text:t.toUpperCase(),time:Date.now()});
- save();document.getElementById('cInput').value='';renderPrivate();
- setTimeout(()=>{privateChats[key].push({from:currentChatWith.name,to:me.name,text:"BIG MESSAGE RECEIVED! FUN INSIDE APP! 😎",time:Date.now()});save();renderPrivate();},1200);
+function sendMsg(){
+ let inp = document.getElementById('chatInput');
+ if(!inp.value) return;
+ let key = 'chat_'+currentChat;
+ if(!chats[key]) chats[key]=[];
+ chats[key].push({text: inp.value, me:true});
+ // auto reply
+ setTimeout(()=>{ chats[key].push({text:'Thanks! I be real person for '+workers[currentChat].address+'. We fit meet.', me:false}); save(); renderChat(); }, 800);
+ inp.value=''; save(); renderChat();
 }
-function sendPublic(){
- if(!me)return openJoin();
- let t=document.getElementById('pChatInput').value;if(!t)return;
- publicChats.push({name:me.name,loc:me.loc,text:t.toUpperCase(),time:Date.now()});
- save();document.getElementById('pChatInput').value='';renderPublic();
-}
-render();renderPublic();
-if(!me)document.getElementById('joinModal').classList.remove('hidden');
+renderHome();
 </script>
 </body>
 </html>

@@ -1,334 +1,124 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Naija Work Connect - Real Creators</title>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Naija Work Connect - LIVE Meet</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta property="og:title" content="Naija Work Connect - LIVE Meet">
+<meta property="og:description" content="Live chat, meet workers, post jobs instantly in Lagos!">
+<meta property="og:image" content="https://sundizzy064a-ux.github.io/naija-work-connect/logo.png">
+<meta name="theme-color" content="#16a34a">
+<link rel="icon" href="logo.png">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui;background:#F3E8FF;color:#222}
-.app{max-width:430px;margin:0 auto;min-height:100vh;background:#fff;display:flex;flex-direction:column;position:relative;box-shadow:0 0 25px rgba(0,0,0,.15)}
-.top{background:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E9D5FF;position:sticky;top:0;z-index:20}
-.top b{font-size:18px;color:#7C3AED} .top span{font-size:10px;color:#999}
-.auth{flex:1;padding:20px;background:#FDF4FF;overflow-y:auto}
-.card{background:#fff;border:1.5px solid #E9D5FF;border-radius:18px;padding:14px;margin:8px 0;box-shadow:0 4px 12px rgba(124,58,237,.08)}
-.card input,.card select,.card textarea{width:100%;background:#FAF5FF;border:1.5px solid #E9D5FF;padding:11px;border-radius:12px;margin:5px 0;font-size:14px;outline:none}
-.btn{width:100%;background:#7C3AED;color:#fff;border:none;padding:12px;border-radius:28px;font-weight:900;margin-top:8px;cursor:pointer}
-.swipeView{background:#7C3AED;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 16px 90px;position:relative;overflow:hidden}
-.swipeStack{position:relative;width:280px;height:420px;margin-top:10px}
-.swipeCard{position:absolute;width:100%;height:100%;border-radius:28px;overflow:hidden;border:4px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.3);background:#fff;transition:transform .35s, opacity .35s}
-.swipeCard.top{transform:rotate(-3deg) translateY(0);z-index:2}
-.swipeCard.bottom{transform:rotate(4deg) translateY(25px) scale(.94);z-index:1;opacity:.95}
-.swipeCard img{width:100%;height:100%;object-fit:cover}
-.swipeCard .label{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.6);color:#fff;padding:4px 10px;border-radius:20px;font-size:13px;font-weight:800}
-.swipeCard .name{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;padding:18px 14px 12px}
-.swipeActions{display:flex;gap:16px;margin-top:18px;z-index:5}
-.act{width:82px;height:62px;border-radius:18px;border:none;font-weight:900;font-size:16px;box-shadow:0 6px 14px rgba(0,0,0,.2);cursor:pointer}
-.act.no{background:#FF6B35;color:#fff;transform:rotate(-5deg)} .act.yes{background:#00C950;color:#fff;transform:rotate(5deg)}
-.view{flex:1;overflow-y:auto;padding-bottom:85px;background:#FDF4FF}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px}
-.worker{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #E9D5FF;cursor:pointer}
-.worker img{width:100%;height:150px;object-fit:cover;background:#F3E8FF}
-.workerInfo{padding:8px}
-.cat{position:absolute;top:6px;left:6px;background:#7C3AED;color:#fff;font-size:9px;padding:3px 7px;border-radius:10px;font-weight:800}
-.bottomNav{position:absolute;bottom:0;left:0;right:0;background:#111;display:flex;padding:8px 0;z-index:30}
-.bottomNav button{flex:1;background:transparent;border:none;color:#777;padding:6px;font-size:10px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
-.bottomNav button.on{color:#A855F7}
-.chatList{display:flex;gap:10px;padding:12px;background:#fff;margin:6px 10px;border-radius:14px;border:1px solid #E9D5FF;align-items:center;cursor:pointer}
-.av{width:46px;height:46px;border-radius:50%;background:#F3E8FF;border:2px solid #A855F7;display:flex;align-items:center;justify-content:center;font-weight:900;overflow:hidden;color:#7C3AED}
-.av img{width:100%;height:100%;object-fit:cover}
-.chatBox{background:#FDF4FF;flex:1;overflow-y:auto;padding:10px}
-.bubble{max-width:78%;padding:10px 13px;border-radius:18px;font-size:13px;margin:5px 0}
-.bubble.me{align-self:flex-end;background:#7C3AED;color:#fff;border-bottom-right-radius:6px;margin-left:auto}
-.bubble.other{align-self:flex-start;background:#fff;border:1px solid #E9D5FF;border-bottom-left-radius:6px}
-.bubbleWrap{display:flex;flex-direction:column}
-.inputbar{position:absolute;bottom:56px;left:0;right:0;background:#fff;padding:8px 10px;display:flex;gap:8px;align-items:center;border-top:1px solid #E9D5FF}
-.wrap{flex:1;background:#F3E8FF;border-radius:24px;display:flex;align-items:center;padding:4px 10px;border:1px solid #E9D5FF}
-.wrap input{flex:1;background:transparent;border:none;outline:none;padding:6px;font-size:13px}
-.sendBtn{width:42px;height:42px;border-radius:50%;border:none;background:#7C3AED;color:#fff;font-weight:900;cursor:pointer}
-.editOverlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:100;display:none;align-items:center;justify-content:center;padding:14px}
-.editBox{background:#fff;border-radius:20px;padding:16px;width:100%;max-width:400px;max-height:92vh;overflow-y:auto;border:2px solid #A855F7}
-.filterBar{display:flex;gap:6px;overflow-x:auto;padding:10px 10px 2px;scrollbar-width:none}
-.filterBar button{white-space:nowrap;padding:6px 12px;border-radius:20px;border:1px solid #E9D5FF;background:#fff;font-size:11px;font-weight:700;color:#666;cursor:pointer}
-.filterBar button.on{background:#7C3AED;color:#fff;border-color:#7C3AED}
-</style></head><body>
-<div class="app">
-<div class="top"><b>Naija Work Connect</b><span id="topInfo">Real Professionals Only</span></div>
-<div id="auth">
-<div style="text-align:center;margin-bottom:10px">
-<h1 style="font-size:28px;color:#7C3AED">Let's Work<br><span style="background:#F3E8FF;padding:2px 10px;border-radius:10px;border:1px solid #E9D5FF">Together</span></h1>
-<p style="color:#6B7280;font-size:12px;margin-top:6px">Artists • Tailors • Producers • All Creators</p>
-<p style="font-size:10px;color:#A855F7;margin-top:4px;font-weight:800">VERIFIED REAL PEOPLE • NO BOTS</p>
+body{background:#0a0a0a;color:#fff;font-family:Inter,system-ui}
+.glass{background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1)}
+.live-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pulse 1.5s infinite;display:inline-block}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #22c55e}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.logo-ng{width:40px;height:40px;background:#16a34a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:18px}
+.msg-me{background:#16a34a;color:#000;margin-left:auto}
+.msg-other{background:#1e1e1e;border:1px solid #2a2a2a}
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-50 bg-black/90 border-b border-white/10 p-3">
+<div class="max-w-6xl mx-auto flex justify-between items-center">
+<div class="flex items-center gap-3"><div class="logo-ng">NG</div><div><h1 class="font-black leading-none text-sm">NAIJA WORK CONNECT</h1><div class="text-xs text-green-400 flex items-center gap-1"><span class="live-dot"></span><span id="liveCount">LIVE • 3 online</span></div></div></div>
+<button onclick="openPost()" class="bg-white text-black px-4 py-2 rounded-full font-bold text-xs">+ POST</button>
 </div>
-<div id="loginBox" class="card">
-<b style="font-size:12px;color:#7C3AED">LOGIN TO YOUR WORKER ACCOUNT</b>
-<input id="le" placeholder="Email Address">
-<input id="lp" type="password" placeholder="Password">
-<button class="btn" onclick="login()">Login</button>
-<p style="text-align:center;font-size:12px;margin-top:8px;color:#666">New creator? <span style="color:#7C3AED;font-weight:900;text-decoration:underline;cursor:pointer" onclick="showSignup()">Create Worker Profile</span></p>
+<div class="max-w-6xl mx-auto flex gap-2 mt-3">
+<button onclick="tab='jobs';render()" id="tabJobs" class="flex-1 bg-white text-black py-2 rounded-full text-xs font-bold">💼 Jobs</button>
+<button onclick="tab='chat';render()" id="tabChat" class="flex-1 glass py-2 rounded-full text-xs font-bold">💬 LIVE Chat <span id="chatBadge" class="bg-green-500 text-black px-2 rounded-full ml-1">LIVE</span></button>
+<button onclick="tab='people';render()" id="tabPeople" class="flex-1 glass py-2 rounded-full text-xs font-bold">👥 People</button>
 </div>
-<div id="signupBox" class="card" style="display:none">
-<b style="font-size:12px;color:#7C3AED">CREATE PROFESSIONAL PROFILE</b>
-<input id="sn" placeholder="Full Name (e.g. Sundizzy)">
-<input id="sage" type="number" placeholder="Age">
-<select id="swork"><option value="Artist / Singer">Artist / Singer</option><option value="Tailor / Fashion">Tailor / Fashion Designer</option><option value="Producer / Beatmaker">Producer / Beatmaker</option><option value="Photographer">Photographer / Videographer</option><option value="Barber / Hair">Barber / Hair Stylist</option><option value="Makeup Artist">Makeup Artist</option><option value="Dancer">Dancer</option><option value="DJ">DJ</option><option value="Content Creator">Content Creator</option><option value="Graphic Designer">Graphic Designer</option><option value="Model">Model</option></select>
-<select id="sarea"><option>Lekki</option><option>Ikeja</option><option>Yaba</option><option>Surulere</option><option>VI</option><option>Ajah</option><option>Oshodi</option><option>Ikorodu</option><option>Festac</option><option>Agege</option></select>
-<textarea id="sbio" rows="2" placeholder="What do you do? E.g. I am an Afrobeat artist looking for a producer..."></textarea>
-<input type="file" id="sfile" accept="image/*">
-<input id="se" placeholder="Email Address">
-<input id="sp" type="password" placeholder="Password">
-<button class="btn" onclick="signup()">Join As Creator</button>
-<p style="text-align:center;font-size:12px;margin-top:8px;color:#666">Already have an account? <span style="color:#7C3AED;font-weight:900;text-decoration:underline;cursor:pointer" onclick="showLogin()">Login</span></p>
+</header>
+
+<div class="max-w-6xl mx-auto p-3 pb-20">
+<div id="jobsSection"></div>
+<div id="chatSection" class="hidden">
+<div class="glass rounded-2xl p-3 mb-3 flex items-center gap-2 text-xs"><span class="live-dot"></span><span id="onlineText">12 people dey inside chat now - everybody go see your message!</span></div>
+<div id="chatMessages" class="space-y-2 max-h-[60vh] overflow-y-auto p-2"></div>
+<div class="fixed bottom-0 left-0 right-0 max-w-6xl mx-auto p-3 bg-black border-t border-white/10 flex gap-2">
+<input id="chatName" placeholder="Your name" class="w-24 bg-white/10 border border-white/10 rounded-full px-4 py-3 text-xs outline-none">
+<input id="chatInput" onkeypress="if(event.key==='Enter')sendMsg()" placeholder="Type message... everybody go see am!" class="flex-1 bg-white/10 border border-white/10 rounded-full px-5 py-3 text-sm outline-none">
+<button onclick="sendMsg()" class="bg-green-500 text-black w-12 h-12 rounded-full font-bold"><i class="fa fa-paper-plane"></i></button>
 </div>
 </div>
-<div id="main" style="display:none;flex:1;flex-direction:column;height:100%;position:relative">
-<div id="vSwipe" class="swipeView" style="display:flex">
-<h2 style="color:#fff;font-size:18px;margin-bottom:6px">Let's Connect?</h2>
-<p style="color:#E9D5FF;font-size:11px" id="swipeInfo">Find professionals to collaborate with</p>
-<div class="swipeStack" id="swipeStack"></div>
-<div class="swipeActions">
-<button class="act no" onclick="swipe('no')">NO</button>
-<button class="act yes" onclick="swipe('yes')">YES</button>
+<div id="peopleSection" class="hidden"></div>
 </div>
-<button style="margin-top:14px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:8px 18px;border-radius:20px;font-size:12px;cursor:pointer" onclick="tab('workers')">Send Message</button>
-</div>
-<div id="vWorkers" class="view" style="display:none">
-<div class="filterBar" id="filterBar"></div>
-<div id="workersGrid" class="grid"></div>
-</div>
-<div id="vChats" class="view" style="display:none"><div id="chatList"></div></div>
-<div id="vChatBox" class="view" style="display:none;flex-direction:column;height:100%"><div style="background:#fff;padding:8px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #E9D5FF"><button onclick="backToChats()" style="background:transparent;border:none;font-size:18px;cursor:pointer">←</button><div class="av" id="chatAv"></div><div><b id="chatName" style="font-size:13px"></b><div style="font-size:10px;color:#00C950" id="chatWork"></div></div></div><div class="chatBox" id="ch"></div><div class="inputbar"><div class="wrap"><input id="msg" placeholder="Type a message..."><button onclick="document.getElementById('file').click()" style="background:transparent;border:none;cursor:pointer">📷</button></div><button class="sendBtn" onclick="sendMsg()">➤</button><input type="file" id="file" accept="image/*" style="display:none" onchange="sendPic(this)"></div></div>
-<div id="vProfile" class="view" style="display:none"><div id="myProfile"></div></div>
-<div class="bottomNav">
-<button id="bSwipe" class="on" onclick="tab('swipe')">SWIPE</button>
-<button id="bWorkers" onclick="tab('workers')">WORKERS</button>
-<button id="bChats" onclick="tab('chats')">CHATS</button>
-<button id="bProfile" onclick="tab('profile')">PROFILE</button>
-</div>
-</div>
-<div id="editOverlay" class="editOverlay">
-<div class="editBox">
-<h3 style="color:#7C3AED;text-align:center">Edit Professional Profile</h3>
-<p style="font-size:11px;color:#999;text-align:center">Update your work, photo, and bio anytime</p>
-<div style="text-align:center;margin:12px 0">
-<div id="editPicPreview" class="av" style="width:90px;height:90px;margin:0 auto;font-size:30px;border:3px solid #A855F7"></div>
-<label style="background:#7C3AED;color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:800;cursor:pointer;display:inline-block;margin-top:10px">
-CHANGE PROFILE PHOTO
-<input type="file" id="efile" accept="image/*" style="display:none" onchange="previewEditPic(this)">
-</label>
-<p style="font-size:10px;color:#999;margin-top:4px" id="saveStatus"></p>
-</div>
-<input id="en" placeholder="Full Name">
-<input id="eage" type="number" placeholder="Age">
-<select id="ework"><option>Artist / Singer</option><option>Tailor / Fashion Designer</option><option>Producer / Beatmaker</option><option>Photographer / Videographer</option><option>Barber / Hair Stylist</option><option>Makeup Artist</option><option>Dancer</option><option>DJ</option><option>Content Creator</option><option>Graphic Designer</option><option>Model</option></select>
-<select id="earea"><option>Lekki</option><option>Ikeja</option><option>Yaba</option><option>Surulere</option><option>VI</option><option>Ajah</option><option>Oshodi</option><option>Ikorodu</option><option>Festac</option><option>Agege</option></select>
-<textarea id="ebio" rows="3" placeholder="Describe your work and what collaboration you are looking for"></textarea>
-<input id="epass" type="text" placeholder="Password">
-<div style="display:flex;gap:8px;margin-top:10px">
-<button class="btn" style="flex:1;background:#888" onclick="closeEdit()">Cancel</button>
-<button class="btn" style="flex:1" onclick="saveEdit()">Save Changes</button>
+
+<div id="postModal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-end md:items-center justify-center">
+<div class="bg-[#1a1a1a] w-full md:max-w-lg rounded-t-3xl md:rounded-2xl p-5 border border-white/10">
+<div class="flex justify-between mb-4"><h3 class="font-bold">Post Job LIVE</h3><button onclick="closePost()" class="w-8 h-8 rounded-full bg-white/10">x</button></div>
+<div class="space-y-3">
+<input id="pTitle" placeholder="Job Title" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none">
+<select id="pCat" class="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm"><option value="cleaning">Cleaning</option><option value="plumbing">Plumbing</option><option value="electrical">Electrical</option><option value="laundry">Laundry</option></select>
+<select id="pLoc" class="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm"><option>Ikeja</option><option>Lekki</option><option>Yaba</option><option>Surulere</option></select>
+<input id="pPrice" type="number" placeholder="Price" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm">
+<textarea id="pDesc" placeholder="Describe..." rows="2" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm"></textarea>
+<input id="pPhone" placeholder="WhatsApp" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm">
+<button onclick="postJob()" class="w-full bg-green-500 text-black font-bold py-3 rounded-xl">POST LIVE!</button>
 </div>
 </div>
 </div>
-</div>
+
 <script>
-const firebaseConfig={apiKey:"AIzaSyDemo-Replace",authDomain:"demo.firebaseapp.com",databaseURL:"https://demo-default-rtdb.firebaseio.com",projectId:"demo"};
-let useFirebase=false;
-try{if(!firebaseConfig.apiKey.includes("Demo-Replace")){firebase.initializeApp(firebaseConfig);useFirebase=true;}}catch(e){useFirebase=false;}
-let cur=JSON.parse(localStorage.getItem('naija_work_cur')||'null');
-let users=[],msgs=[],swipeIndex=0,currentFilter='All',currentChatId=null,newPic=null;
-const works=["All","Artist / Singer","Tailor / Fashion","Producer","Photographer","Barber","Makeup","Dancer","Creator"];
-function showSignup(){loginBox.style.display='none';signupBox.style.display='block';}
-function showLogin(){signupBox.style.display='none';loginBox.style.display='block';}
-function compressImage(b64, cb){
-let img=new Image();img.onload=function(){
-let c=document.createElement('canvas'),max=420,w=img.width,h=img.height;
-if(w>h){if(w>max){h*=max/w;w=max;}}else{if(h>max){w*=max/h;h=max;}}
-c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
-cb(c.toDataURL('image/jpeg',0.75));
-};img.src=b64;
+const API="https://crudcrud.com/api/1681de00cc2541829e1f7b9eef1e467e";
+let tab='chat';
+let jobs=JSON.parse(localStorage.getItem('naija_jobs')||'null')||[{id:1,title:"House Cleaning",cat:"cleaning",loc:"Lekki",price:25000,desc:"Urgent",phone:"08012345678",time:Date.now()}];
+let messages=JSON.parse(localStorage.getItem('naija_msgs')||'null')||[{name:"Admin",text:"Welcome to Naija Work Connect LIVE! Everybody dey see each other here! 🔥",time:Date.now()-60000},{name:"Sundizzy",text:"If you open app now, you go see this chat LIVE!",time:Date.now()-30000}];
+let myName=localStorage.getItem('myName')||'';
+function saveJobs(){localStorage.setItem('naija_jobs',JSON.stringify(jobs));}
+function saveMsgs(){localStorage.setItem('naija_msgs',JSON.stringify(messages.slice(-50)));localStorage.setItem('myName',myName);}
+
+async function loadLive(){
+ try{
+  let r=await fetch(API+'/profiles');if(r.ok){let d=await r.json();if(d.length>0)jobs=d.map(x=>({id:x._id,title:x.name,cat:x.skill||'cleaning',loc:x.location||'Lekki',price:x.bio||5000,desc:x.whatsapp||'',phone:x.whatsapp||'',time:Date.now()}));}
+  let r2=await fetch(API+'/messages');if(r2.ok){let m=await r2.json();if(m.length>0)messages=m.map(x=>({name:x.name,text:x.text,time:x.time||Date.now()}));}
+ }catch(e){}
+ render();
 }
-function signup(){
-let name=sn.value.trim(),age=sage.value,work=swork.value,area=sarea.value,bio=sbio.value.trim(),email=se.value.trim().toLowerCase(),pass=sp.value.trim();
-if(!name||!email||!pass||!age)return alert('Please fill name, age, email and password');
-let file=document.getElementById('sfile').files[0];
-let finish=(pic)=>{
-let u={id:Date.now().toString(),name:name,age:age,work:work,area:area,bio:bio,email:email,pass:pass,pic:pic||'',joined:Date.now()};
-if(useFirebase){firebase.database().ref('work_users/'+u.id).set(u).then(()=>{cur=u;localStorage.setItem('naija_work_cur',JSON.stringify(cur));startApp();});}
-else{let arr=JSON.parse(localStorage.getItem('naija_work_users')||'[]');if(arr.find(x=>x.email===email))return alert('Email already exists');arr.push(u);localStorage.setItem('naija_work_users',JSON.stringify(arr));cur=u;localStorage.setItem('naija_work_cur',JSON.stringify(cur));startApp();}
-};
-if(file){let r=new FileReader();r.onload=e=>compressImage(e.target.result,finish);r.readAsDataURL(file);}else finish('');
+function render(){
+ document.getElementById('tabJobs').className=tab=='jobs'?'flex-1 bg-white text-black py-2 rounded-full text-xs font-bold':'flex-1 glass py-2 rounded-full text-xs font-bold';
+ document.getElementById('tabChat').className=tab=='chat'?'flex-1 bg-white text-black py-2 rounded-full text-xs font-bold':'flex-1 glass py-2 rounded-full text-xs font-bold';
+ document.getElementById('tabPeople').className=tab=='people'?'flex-1 bg-white text-black py-2 rounded-full text-xs font-bold':'flex-1 glass py-2 rounded-full text-xs font-bold';
+ document.getElementById('jobsSection').classList.toggle('hidden',tab!=='jobs');
+ document.getElementById('chatSection').classList.toggle('hidden',tab!=='chat');
+ document.getElementById('peopleSection').classList.toggle('hidden',tab!=='people');
+ if(tab=='jobs'){
+  document.getElementById('jobsSection').innerHTML=`<div class="grid md:grid-cols-2 gap-3">${jobs.map(j=>`<div class="glass rounded-2xl p-4 border border-white/10"><div class="flex justify-between mb-1"><span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">${j.cat} • ${j.loc}</span><span class="text-xs text-white/40">now</span></div><h3 class="font-bold text-sm">${j.title}</h3><p class="text-xs text-white/60 mb-2">${j.desc}</p><div class="flex justify-between"><span class="font-bold text-green-400 text-sm">₦${j.price}</span><a href="https://wa.me/234${(j.phone+'').slice(-10)}" target="_blank" class="bg-white text-black px-3 py-1 rounded-full text-xs font-bold">Chat</a></div></div>`).join('')}</div>`;
+ }
+ if(tab=='chat'){
+  document.getElementById('chatMessages').innerHTML=messages.map(m=>{
+   let isMe=myName&&m.name===myName;
+   return `<div class="flex flex-col ${isMe?'items-end':'items-start'}"><div class="${isMe?'msg-me':'msg-other'} rounded-2xl px-4 py-2 max-w-[80%]"><div class="text-[10px] opacity-60 font-bold">${m.name}</div><div class="text-sm">${m.text}</div></div><div class="text-[10px] text-white/30 mt-1">${new Date(m.time).toLocaleTimeString()}</div></div>`;
+  }).join('');
+  let el=document.getElementById('chatMessages');el.scrollTop=el.scrollHeight;
+  document.getElementById('onlineText').innerText=`${messages.length+3} people don chat - everybody dey see LIVE!`;
+ }
+ if(tab=='people'){
+  let names=[...new Set(messages.map(m=>m.name))];
+  document.getElementById('peopleSection').innerHTML=`<div class="glass rounded-2xl p-4"><h3 class="font-bold mb-3">People Wey Dey Online Now (${names.length})</h3><div class="space-y-3">${names.map(n=>`<div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center font-bold text-black">${n[0]}</div><div><p class="font-bold text-sm">${n}</p><p class="text-xs text-green-400 flex items-center gap-1"><span class="live-dot"></span>Online now - dey inside chat</p></div><a href="https://wa.me/" class="ml-auto bg-white/10 px-3 py-1 rounded-full text-xs">Chat</a></div>`).join('')}</div></div>`;
+ }
+ document.getElementById('liveCount').innerText=`LIVE • ${messages.length} chats • ${jobs.length} jobs`;
+ document.getElementById('chatName').value=myName;
 }
-function login(){
-let email=le.value.trim().toLowerCase(),pass=lp.value.trim();
-if(useFirebase){firebase.database().ref('work_users').once('value',snap=>{let d=snap.val()||{};let f=Object.values(d).find(u=>u.email===email&&u.pass===pass);if(!f)return alert('Incorrect credentials');cur=f;localStorage.setItem('naija_work_cur',JSON.stringify(cur));startApp();});}
-else{let arr=JSON.parse(localStorage.getItem('naija_work_users')||'[]');let u=arr.find(x=>x.email===email&&x.pass===pass);if(!u)return alert('Incorrect email or password');cur=u;localStorage.setItem('naija_work_cur',JSON.stringify(cur));startApp();}
+async function sendMsg(){
+ let name=document.getElementById('chatName').value||'Anon';
+ let text=document.getElementById('chatInput').value;
+ if(!text)return;
+ myName=name;
+ let msg={name,text,time:Date.now()};
+ messages.push(msg);saveMsgs();
+ document.getElementById('chatInput').value='';
+ render();
+ try{await fetch(API+'/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(msg)});}catch(e){}
+ try{await fetch(API+'/profiles',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,skill:'chatting',location:'Lagos',whatsapp:text,bio:Date.now()})});}catch(e){}
 }
-function startApp(){
-auth.style.display='none';main.style.display='flex';
-topInfo.textContent=cur.name+' - '+cur.work.split('/')[0];
-if(useFirebase){
-firebase.database().ref('work_users').on('value',snap=>{let d=snap.val()||{};users=Object.values(d);let me=users.find(u=>u.id===cur.id);if(me){cur=me;localStorage.setItem('naija_work_cur',JSON.stringify(cur));}renderAll();});
-firebase.database().ref('work_messages').on('value',snap=>{let d=snap.val()||{};msgs=Object.values(d).sort((a,b)=>a.ts-b.ts);renderChatList();if(currentChatId)renderMessages();});
-}else{
-users=JSON.parse(localStorage.getItem('naija_work_users')||'[]');
-msgs=JSON.parse(localStorage.getItem('naija_work_msgs')||'[]');
-renderAll();
-}
-}
-function renderAll(){renderFilters();renderSwipe();renderWorkers();renderChatList();renderMyProfile();}
-function tab(t){
-['swipe','workers','chats','chatBox','profile'].forEach(x=>{
-let el=document.getElementById('v'+x[0].toUpperCase()+x.slice(1));if(el)el.style.display='none';
-let b=document.getElementById('b'+x[0].toUpperCase()+x.slice(1));if(b)b.classList.remove('on');
-});
-if(t==='swipe')document.getElementById('vSwipe').style.display='flex';
-if(t==='workers')document.getElementById('vWorkers').style.display='block';
-if(t==='chats')document.getElementById('vChats').style.display='block';
-if(t==='chatBox'){document.getElementById('vChatBox').style.display='flex';document.getElementById('vChatBox').style.flexDirection='column';}
-if(t==='profile')document.getElementById('vProfile').style.display='block';
-let btn=document.getElementById('b'+t[0].toUpperCase()+t.slice(1));if(btn)btn.classList.add('on');
-}
-function renderFilters(){
-let h=works.map(w=>`<button class="${currentFilter===w?'on':''}" onclick="setFilter('${w}')">${w}</button>`).join('');
-document.getElementById('filterBar').innerHTML=h;
-}
-function setFilter(f){currentFilter=f;renderFilters();renderWorkers();}
-function getFiltered(){
-let others=users.filter(u=>u.id!==cur.id);
-if(currentFilter!=='All')others=others.filter(u=>u.work.includes(currentFilter) || u.work===currentFilter);
-return others;
-}
-function renderSwipe(){
-let others=getFiltered();
-if(others.length===0){
-document.getElementById('swipeStack').innerHTML=`<div style="color:#fff;text-align:center;padding:30px"><h3>No workers yet</h3><p style="font-size:12px;margin-top:8px">You are the first ${cur.work}! Share your link so other professionals can join.</p><div style="background:#fff;border-radius:12px;padding:8px;margin-top:12px"><p style="color:#7C3AED;font-size:10px;word-break:break-all">${location.href}</p></div><button class="btn" style="background:#fff;color:#7C3AED;margin-top:10px" onclick="navigator.clipboard.writeText(location.href);alert('Link copied!')">Copy Link</button></div>`;
-document.getElementById('swipeInfo').textContent='No workers yet - Share your link';
-return;
-}
-if(swipeIndex>=others.length)swipeIndex=0;
-let curSwipe=others[swipeIndex];
-let next=others[(swipeIndex+1)%others.length];
-document.getElementById('swipeStack').innerHTML=`
-<div class="swipeCard bottom"><img src="${next.pic||'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400'}"><div class="label">Next</div><div class="name"><b>${next.name}, ${next.age}</b><p>${next.work} - ${next.area}</p></div></div>
-<div class="swipeCard top" id="topCard"><img src="${curSwipe.pic||'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400'}"><div class="label">${curSwipe.work}</div><div class="name"><b>You, ${cur.age}</b><div style="height:2px"></div><b style="background:rgba(0,0,0,.5);padding:2px 6px;border-radius:8px">${curSwipe.name}, ${curSwipe.age} - ${curSwipe.area}</b><p style="margin-top:4px">${curSwipe.bio||''}</p></div></div>
-`;
-document.getElementById('swipeInfo').textContent=`${others.length} professionals - ${curSwipe.work} - ${curSwipe.area}`;
-}
-function swipe(type){
-let others=getFiltered();
-if(others.length===0)return;
-let curUser=others[swipeIndex];
-let card=document.getElementById('topCard');
-if(type==='yes'){
-card.style.transform='translateX(400px) rotate(25deg)';card.style.opacity='0';
-setTimeout(()=>{startChat(curUser.id);alert('You said YES to '+curUser.name+'! You can now message them - '+curUser.work);swipeIndex++;renderSwipe();},300);
-}else{
-card.style.transform='translateX(-400px) rotate(-25deg)';card.style.opacity='0';
-setTimeout(()=>{swipeIndex++;renderSwipe();},300);
-}
-}
-function renderWorkers(){
-let others=getFiltered();
-if(others.length===0){document.getElementById('workersGrid').innerHTML='<p style="grid-column:1/3;text-align:center;color:#999;padding:30px;font-size:12px">No professionals in this category yet.</p>';return;}
-document.getElementById('workersGrid').innerHTML=others.map(u=>`
-<div class="worker" onclick="startChat('${u.id}')">
-<div style="position:relative"><img src="${u.pic||'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400'}"><span class="cat">${u.work.split(' ')[0]}</span></div>
-<div class="workerInfo"><b>${u.name}, ${u.age}</b><p>${u.area}</p><p style="color:#7C3AED;font-weight:700">${u.work}</p><p style="margin-top:2px">${(u.bio||'').slice(0,40)}...</p></div>
-</div>
-`).join('');
-}
-function startChat(uid){
-let u=users.find(x=>x.id===uid);if(!u)return;
-currentChatId=uid;
-document.getElementById('chatName').textContent=u.name;
-document.getElementById('chatWork').textContent=u.work+' - '+u.area;
-document.getElementById('chatAv').innerHTML=u.pic?`<img src="${u.pic}">`:u.name.charAt(0);
-tab('chatBox');renderMessages();
-}
-function backToChats(){tab('chats');renderChatList();}
-function renderChatList(){
-let others=users.filter(u=>u.id!==cur.id);
-let last={};msgs.forEach(m=>{if(m.from===cur.id||m.to===cur.id){let o=m.from===cur.id?m.to:m.from;last[o]=m;}});
-if(others.length===0){chatList.innerHTML='<p style="text-align:center;color:#999;padding:20px;font-size:12px">No chats yet. Swipe YES to start collaborating!</p>';return;}
-chatList.innerHTML=others.map(u=>{
-let lm=last[u.id];
-return `<div class="chatList" onclick="startChat('${u.id}')"><div class="av">${u.pic?`<img src="${u.pic}">`:u.name.charAt(0)}</div><div style="flex:1"><b style="font-size:13px">${u.name} - ${u.work.split('/')[0]}</b><div style="font-size:11px;color:#888">${lm? (lm.text||'Photo') : 'Tap to start a collaboration chat'}</div></div><div style="width:8px;height:8px;background:#00C950;border-radius:50%"></div></div>`;
-}).join('');
-}
-function renderMessages(){
-if(!currentChatId)return;
-let conv=msgs.filter(m=>(m.from===cur.id&&m.to===currentChatId)||(m.from===currentChatId&&m.to===cur.id));
-let h='';conv.forEach(m=>{
-let me=m.from===cur.id;let pic=m.pic?`<img src="${m.pic}" style="width:100%;border-radius:10px;margin-top:4px;max-height:180px;object-fit:cover">`:'';
-h+=`<div class="bubbleWrap"><div class="bubble ${me?'me':'other'}">${m.text||''}${pic}<div style="font-size:9px;opacity:.6;text-align:right;margin-top:2px">${m.time||''} ${me?'✓✓':''}</div></div></div>`;
-});
-document.getElementById('ch').innerHTML=h||'<p style="text-align:center;color:#aaa;font-size:11px;margin-top:20px">No messages yet. Start your collaboration conversation!</p>';
-document.getElementById('ch').scrollTop=99999;
-}
-function sendMsg(){
-let t=msg.value.trim();if(!t||!currentChatId)return;msg.value='';
-let m={from:cur.id,to:currentChatId,text:t,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),ts:Date.now(),id:Date.now().toString()};
-if(useFirebase){firebase.database().ref('work_messages/'+m.id).set(m);}else{msgs.push(m);localStorage.setItem('naija_work_msgs',JSON.stringify(msgs));renderMessages();renderChatList();}
-}
-function sendPic(i){
-let f=i.files[0];if(!f||!currentChatId)return;let r=new FileReader();r.onload=e=>{
-compressImage(e.target.result,(c)=>{
-let m={from:cur.id,to:currentChatId,text:'',pic:c,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),ts:Date.now(),id:Date.now().toString()};
-if(useFirebase){firebase.database().ref('work_messages/'+m.id).set(m);}else{msgs.push(m);localStorage.setItem('naija_work_msgs',JSON.stringify(msgs));renderMessages();}
-});
-};r.readAsDataURL(f);
-}
-function renderMyProfile(){
-if(!cur)return;
-document.getElementById('myProfile').innerHTML=`
-<div style="background:#fff;padding:18px;text-align:center;border-bottom:1px solid #E9D5FF">
-<div class="av" style="width:88px;height:88px;margin:0 auto;font-size:32px;border:3px solid #A855F7">${cur.pic?`<img src="${cur.pic}">`:cur.name.charAt(0)}</div>
-<h2 style="margin-top:8px">${cur.name}, ${cur.age}</h2>
-<p style="color:#7C3AED;font-weight:800;font-size:13px">${cur.work}</p>
-<p style="color:#666;font-size:12px">${cur.area}</p>
-<p style="font-size:12px;color:#444;margin-top:6px">${cur.bio||''}</p>
-<button class="btn" style="background:#7C3AED;margin-top:12px" onclick="openEdit()">Edit Professional Profile</button>
-</div>
-<div style="padding:12px">
-<div class="card" style="text-align:center;border:2px dashed #A855F7">
-<b style="color:#7C3AED;font-size:12px">Invite Other Professionals</b>
-<p style="font-size:10px;color:#666;margin:6px 0">Share your link - Artists find Artists, Tailors find Tailors</p>
-<p style="font-size:10px;color:#7C3AED;word-break:break-all;background:#F3E8FF;padding:6px;border-radius:8px">${location.href}</p>
-<button class="btn" style="background:#7C3AED" onclick="navigator.clipboard.writeText(location.href);alert('Link copied!')">Copy Link</button>
-<p style="font-size:10px;color:#999;margin-top:6px">Total Professionals: ${users.length} - Verified - Swipe YES / NO</p>
-</div>
-<button class="btn" style="background:#fff;color:#C62828;border:1.5px solid #FFCDD2" onclick="logout()">Logout</button>
-</div>
-`;
-}
-function openEdit(){
-document.getElementById('editOverlay').style.display='flex';
-document.getElementById('en').value=cur.name;document.getElementById('eage').value=cur.age;
-document.getElementById('ework').value=cur.work;document.getElementById('earea').value=cur.area;
-document.getElementById('ebio').value=cur.bio||'';document.getElementById('epass').value=cur.pass;
-document.getElementById('editPicPreview').innerHTML=cur.pic?`<img src="${cur.pic}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:cur.name.charAt(0);
-newPic=null;document.getElementById('saveStatus').textContent='';
-}
-function closeEdit(){document.getElementById('editOverlay').style.display='none';newPic=null;}
-function previewEditPic(inp){
-let f=inp.files[0];if(!f)return;
-if(f.size>8*1024*1024){alert('Image too large!');return;}
-document.getElementById('saveStatus').textContent='Loading...';
-let r=new FileReader();r.onload=e=>{
-compressImage(e.target.result,(c)=>{
-newPic=c;
-document.getElementById('editPicPreview').innerHTML=`<img src="${newPic}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;
-document.getElementById('saveStatus').textContent='Ready - Click Save Changes';
-});
-};r.readAsDataURL(f);
-}
-function saveEdit(){
-let name=en.value.trim(),age=eage.value,work=ework.value,area=earea.value,bio=ebio.value.trim(),pass=epass.value.trim();
-let finalPic=newPic?newPic:cur.pic;
-let upd={...cur,name:name||cur.name,age:age||cur.age,work:work,area:area,bio:bio,pass:pass||cur.pass,pic:finalPic};
-document.getElementById('saveStatus').textContent='Saving...';
-if(useFirebase){firebase.database().ref('work_users/'+cur.id).set(upd).then(()=>{cur=upd;localStorage.setItem('naija_work_cur',JSON.stringify(cur));document.getElementById('saveStatus').textContent='Saved!';setTimeout(()=>{closeEdit();renderAll();alert('Profile updated successfully!');},700);});}
-else{let arr=JSON.parse(localStorage.getItem('naija_work_users')||'[]');let idx=arr.findIndex(u=>u.id===cur.id);if(idx>=0){arr[idx]=upd;localStorage.setItem('naija_work_users',JSON.stringify(arr));}cur=upd;localStorage.setItem('naija_work_cur',JSON.stringify(cur));document.getElementById('saveStatus').textContent='Saved!';setTimeout(()=>{closeEdit();renderAll();alert('Profile updated!');},700);}
-}
-function logout(){if(confirm('Logout?')){localStorage.removeItem('naija_work_cur');location.reload();}}
-document.getElementById('msg')?.addEventListener('keypress',e=>{if(e.key==='Enter')sendMsg();});
-if(cur){auth.style.display='none';main.style.display='flex';startApp();}
+function openPost(){document.getElementById('postModal').classList.remove('hidden');}
+function closePost(){document.getElementById('postModal').classList.add('hidden');}
+function postJob(){let j={id:Date.now(),title:document.getElementById('pTitle').value,cat:document.getElementById('pCat').value,loc:document.getElementById('pLoc').value,price:document.getElementById('pPrice').value||5000,desc:document.getElementById('pDesc').value,phone:document.getElementById('pPhone').value,time:Date.now()};if(!j.title)return alert('Add title');jobs.unshift(j);saveJobs();closePost();render();alert('Job don go LIVE! Everybody go see am!');}
+render();loadLive();setInterval(loadLive,3000);
 </script>
-</body></html>
+</body>
+</html>

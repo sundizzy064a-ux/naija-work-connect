@@ -1,81 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Global Work Connect - Everyone Can Join</title>
-<script src="https://meet.ffmuc.net/external_api.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAGAMU BIZ FINDER</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui;background:#f6f7fb;display:flex;min-height:100vh}
-.left{width:260px;background:#0f172a;color:#fff;padding:16px;display:flex;flex-direction:column;gap:8px}
-.left button{width:100%;padding:12px;border:0;border-radius:10px;background:#1e293b;color:#fff;text-align:left;font-weight:700}
-.left button.active{background:#2563eb}
-.right{flex:1;overflow:auto}.top{background:#2563eb;color:#fff;padding:14px;text-align:center;font-weight:800}
-.card{background:#fff;margin:14px;border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
-label{font-size:13px;font-weight:600;margin-top:10px;display:block;color:#374151}
-input,select,textarea{width:100%;padding:12px;border:1px solid #e5e7eb;border-radius:10px;margin-top:6px;font-size:15px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{width:100%;padding:13px;border:0;border-radius:10px;background:#2563eb;color:#fff;font-weight:800;margin-top:12px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.p-card{background:#fff;border-radius:14px;padding:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);border:1px solid #f1f5f9}
-.p-card img{width:90px;height:90px;border-radius:50%;object-fit:cover}
-.badge{background:#eff6ff;color:#2563eb;padding:5px 10px;border-radius:20px;font-size:12px}
-#messages{height:360px;overflow:auto;background:#f8fafc;border-radius:12px;padding:10px;border:1px solid #e2e8f0}
-.msg{padding:10px;margin:6px 0;background:#fff;border-radius:10px}
-.me{background:#2563eb;color:#fff;text-align:right}
-@media(max-width:760px){body{flex-direction:column}.left{width:100%;flex-direction:row;overflow-x:auto;order:2;padding:10px;gap:6px}.left h2{display:none}.left button{width:auto;white-space:nowrap;padding:10px 14px;font-size:13px}.right{order:1}}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui;background:#f8f8fa}
+.header{background:#111;border-radius:0 0 20px 20px;padding:22px 16px;text-align:center;color:#fff}
+.header h1{font-size:22px}.header p{font-size:13px;opacity:.9;margin-top:4px}
+.search{margin:-18px 14px 10px;background:#fff;border-radius:14px;padding:12px;display:flex;gap:8px;box-shadow:0 4px 12px rgba(0,0,0,.08);border:1px solid #eee}
+.search input{flex:1;border:0;outline:0;font-size:15px}
+.chips{display:flex;gap:8px;overflow:auto;padding:8px 14px;white-space:nowrap;scrollbar-width:none}
+.chip{padding:7px 12px;border-radius:20px;background:#eee;border:1px solid #e5e7eb;font-size:12px;font-weight:600}
+.chip.active{background:#111;color:#fff}
+.card{background:#fff;margin:10px 14px;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05);border:1px solid #f0f0f0}
+.tag{display:inline-block;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700;margin-right:4px}
+.t1{background:#e9e7ff;color:#4f46e5}.t2{background:#ffedd5;color:#9a3412}
+.name{font-weight:800;margin:6px 0 2px}.desc{font-size:13px;color:#555}
+.phone{font-weight:800;margin-top:6px;font-size:14px}
+.btns{display:flex;gap:8px;margin-top:10px}.b{flex:1;padding:12px;border-radius:12px;border:0;font-weight:800;text-align:center;text-decoration:none;display:block}
+.wa{background:#22c55e;color:#fff}.cl{background:#111;color:#fff}
+.add{position:fixed;bottom:16px;right:16px;background:#111;color:#fff;width:56px;height:56px;border-radius:50%;font-size:28px;border:0;z-index:10}
+#form{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);padding:20px;overflow:auto;z-index:20}
+#form>div{background:#fff;border-radius:16px;padding:16px}input,select,textarea{width:100%;padding:10px;margin-top:6px;border-radius:10px;border:1px solid #ddd}
 </style>
 </head>
 <body>
-<div class="left">
-<h2>🌍 Global</h2>
-<button id="m-home" class="active" onclick="showPage('home')">🏠 Home</button>
-<button id="m-people" onclick="showPage('people')">👥 People</button>
-<button id="m-chat" onclick="showPage('chat')">💬 Chat</button>
-<button id="m-meet" onclick="showPage('meet')">📹 Video</button>
-<button id="m-profile" onclick="showPage('profile')">👤 Profile</button>
-<div style="margin-top:auto"><div id="myMini"></div><button onclick="if(confirm('Log out?')){localStorage.removeItem('naija_me');location.reload()}" style="margin-top:8px;background:#334155;width:100%;padding:8px;border-radius:8px;color:#fff;border:0">Log Out</button></div>
+<div class="header">
+<h1>SAGAMU BIZ FINDER</h1>
+<p>Find businesses in Oju Mele - Ewuoliwo - Sabo - Makun - Ajaka - Isale</p>
 </div>
-<div class="right">
-<div class="top">Global Work Connect — Anyone From Anywhere Can Join</div>
-<div id="auth" class="card">
-<h2>Join the Global Community</h2>
-<p style="color:#64748b;font-size:14px;margin-bottom:12px">Sign up with your email only. No password needed. People from all over the world can join.</p>
-<label>Full Name</label><input id="aName" placeholder="Your full name">
-<label>Email Address (Your login)</label><input id="aEmail" type="email" placeholder="Your email">
-<label>Age — Year and Month</label><div class="row"><select id="aYear"></select><select id="aMonth"><option value="">Month</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select></div>
-<label>Gender</label><select id="aGender"><option value="">Select Gender</option><option>Male</option><option>Female</option><option>Other</option></select>
-<label>Work Name (Type any work — e.g. Designer, Plumber, Teacher, Developer)</label><input id="aWork" placeholder="What work do you do?">
-<label>About You</label><textarea id="aBio" placeholder="Tell the world about your work"></textarea>
-<label>Profile Photo</label><input id="aPhoto" type="file" accept="image/*">
-<label><input type="checkbox" id="aRobot"> I am not a robot</label>
-<button class="btn" onclick="doSignup()">Create Account and Join</button>
-</div>
-<div id="app" style="display:none">
-<div id="homeSec" class="card"><h3>Welcome, <span id="wName"></span> 👋</h3><p style="color:#475569;margin:8px 0">People in community: <b id="onlineCount">0</b> 🌍</p><div id="feed"></div><label>Share with community</label><textarea id="postTxt" placeholder="Share something"></textarea><button class="btn" onclick="doPost()">Post to Community</button></div>
-<div id="peopleSec" class="card" style="display:none"><h3>People Around The World</h3><div id="peopleGrid" class="grid" style="margin-top:12px"></div></div>
-<div id="chatSec" class="card" style="display:none"><h3>Global Group Chat</h3><div id="users" style="margin:8px 0"></div><div id="messages"></div><input id="chatInput" placeholder="Type message"><button class="btn" onclick="sendChat()">Send Message</button></div>
-<div id="meetSec" class="card" style="display:none"><h3>Video Meeting</h3><button class="btn" onclick="startMeet()">Start Video Meeting</button><div id="jitsi" style="display:none;width:100%;height:520px;margin-top:12px"></div></div>
-<div id="profileSec" class="card" style="display:none"><div id="myFullProfile"></div></div>
-</div>
-</div>
+<div class="search">🔍<input id="q" placeholder="Search Salon, Food, POS, Fashion..." oninput="render()"></div>
+<div class="chips" id="chips"></div>
+<div id="list"></div>
+<button class="add" onclick="document.getElementById('form').style.display='block'">+</button>
+<div id="form"><div>
+<h3>Add Your Business</h3>
+<input id="fName" placeholder="Business Name">
+<select id="fCat"><option>Salon</option><option>Food</option><option>Finance</option><option>POS</option><option>Fashion</option><option>Phone</option><option>Barbing</option><option>Tailor</option><option>Mechanic</option></select>
+<select id="fLoc"><option>Oju Mele</option><option>Ewuoliwo</option><option>Sabo</option><option>Makun</option><option>Ajaka</option><option>Isale Oko</option><option>GRA</option><option>High Court</option><option>Ogijo</option><option>Sotubo</option></select>
+<input id="fPhone" placeholder="Phone e.g 09167914778">
+<input id="fDesc" placeholder="What you do?">
+<button class="b cl" style="margin-top:10px;width:100%" onclick="saveBiz()">Save Business (Show for Everybody)</button>
+<button class="b" style="margin-top:6px;width:100%;background:#eee" onclick="document.getElementById('form').style.display='none'">Close</button>
+</div></div>
 <script>
-const TOPIC='global-work-connect-world-2026';
-let me=JSON.parse(localStorage.getItem('naija_me')||'null');let people=JSON.parse(localStorage.getItem('naija_people')||'[]');let posts=JSON.parse(localStorage.getItem('naija_posts')||'[]');
-const ySel=document.getElementById('aYear');ySel.innerHTML='<option value="">Year</option>';for(let y=2012;y>=1950;y--){let o=document.createElement('option');o.value=y;o.textContent=y;ySel.appendChild(o);}
-function compress(f,cb){let r=new FileReader();r.onload=e=>{let i=new Image();i.onload=()=>{let c=document.createElement('canvas');c.width=160;c.height=160;c.getContext('2d').drawImage(i,0,0,160,160);cb(c.toDataURL('image/jpeg',0.6))};i.src=e.target.result};r.readAsDataURL(f)}
-function doSignup(){let n=document.getElementById('aName').value.trim(),e=document.getElementById('aEmail').value.trim().toLowerCase(),y=document.getElementById('aYear').value,m=document.getElementById('aMonth').value,g=document.getElementById('aGender').value,w=document.getElementById('aWork').value.trim(),b=document.getElementById('aBio').value.trim(),rb=document.getElementById('aRobot').checked,f=document.getElementById('aPhoto').files[0];if(!n||!e||!y||!m||!g||!w)return alert('Fill Name, Email, Year, Month, Gender, Work'),0;if(!rb)return alert('Tick robot'),0;if(!f)return alert('Pick photo'),0;compress(f,ph=>{let u={name:n,email:e,year:y,month:m,gender:g,work:w,bio:b,photo:ph,time:Date.now(),age:`${m} ${y}`};localStorage.setItem('naija_me',JSON.stringify(u));me=u;if(!people.find(p=>p.email===e))people.unshift(u);localStorage.setItem('naija_people',JSON.stringify(people));boot();fetch(`https://ntfy.sh/${TOPIC}`,{method:'POST',body:`JOIN:${JSON.stringify(u)}`})})}
-async function loadHistory(){try{let r=await fetch(`https://ntfy.sh/${TOPIC}/json?poll=1`);let t=await r.text(),a=0;t.split('\n').forEach(l=>{if(!l.trim())return;try{let j=JSON.parse(l),d=j.message||'';if(d.startsWith('JOIN:')){let u=JSON.parse(d.replace('JOIN:',''));if(!people.find(p=>p.email===u.email)){people.push(u);a++}}}catch{}});if(a>0)localStorage.setItem('naija_people',JSON.stringify(people))}catch{}}
-async function boot(){await loadHistory();me=JSON.parse(localStorage.getItem('naija_me')||'null');if(!me)return;document.getElementById('auth').style.display='none';document.getElementById('app').style.display='block';document.getElementById('wName').innerText=me.name;document.getElementById('myMini').innerHTML=`<img src="${me.photo}" style="width:32px;height:32px;border-radius:50%"> <b style="font-size:12px">${me.name}</b>`;document.getElementById('myFullProfile').innerHTML=`<center><img src="${me.photo}" style="width:100px;height:100px;border-radius:50%"><h3>${me.name}</h3><p>${me.work} • ${me.gender} • ${me.age}</p><p>${me.email}</p><p>${me.bio||''}</p></center>`;renderPeople();renderFeed();listen()}
-function showPage(s){['home','people','chat','meet','profile'].forEach(x=>{let el=document.getElementById(x+'Sec');if(el)el.style.display=x===s?'block':'none'});document.querySelectorAll('.left button').forEach(b=>b.classList.remove('active'));document.getElementById('m-'+s).classList.add('active');if(s==='people')renderPeople()}
-function renderPeople(){let g=document.getElementById('peopleGrid'),list=[...people];if(me&&!list.find(p=>p.email===me.email))list.unshift(me);document.getElementById('onlineCount').innerText=list.length;document.getElementById('users').innerHTML=list.map(p=>`<span class="badge">🟢 ${p.name} - ${p.work}</span>`).join(' ');g.innerHTML=list.map(p=>`<div class="p-card"><img src="${p.photo}"><div><b>${p.name}</b></div><span class="badge">${p.work}</span><div style="font-size:11px;color:#666">${p.gender} • ${p.age}</div><div style="font-size:11px">${(p.bio||'').slice(0,40)}</div><button class="btn" style="padding:6px;font-size:12px;margin-top:6px" onclick="showPage('chat')">Chat</button></div>`).join('')}
-function renderFeed(){document.getElementById('feed').innerHTML=posts.map(p=>`<div style="border-bottom:1px solid #eee;padding:6px 0"><b>${p.name}</b>: ${p.text}</div>`).join('')}
-function doPost(){let t=document.getElementById('postTxt').value.trim();if(!t)return;posts.unshift({name:me.name,text:t});localStorage.setItem('naija_posts',JSON.stringify(posts));document.getElementById('postTxt').value='';renderFeed();fetch(`https://ntfy.sh/${TOPIC}`,{method:'POST',body:`CHAT:${me.name}: ${t}`})}
-function listen(){try{let es=new EventSource(`https://ntfy.sh/${TOPIC}/sse`);es.onmessage=e=>{let d=e.data;if(!d)return;if(d.startsWith('JOIN:')){try{let u=JSON.parse(d.replace('JOIN:',''));if(!people.find(p=>p.email===u.email)){people.unshift(u);localStorage.setItem('naija_people',JSON.stringify(people));renderPeople()}}catch{}}if(d.startsWith('CHAT:')){let m=document.getElementById('messages'),div=document.createElement('div');div.className='msg';div.innerText=d.replace('CHAT:','');m.appendChild(div);m.scrollTop=m.scrollHeight}}}catch{}}
-function sendChat(){let t=document.getElementById('chatInput').value.trim();if(!t)return;fetch(`https://ntfy.sh/${TOPIC}`,{method:'POST',body:`CHAT:${me.name}: ${t}`});let m=document.getElementById('messages'),d=document.createElement('div');d.className='msg me';d.innerText=`You: ${t}`;m.appendChild(d);m.scrollTop=m.scrollHeight;document.getElementById('chatInput').value=''}
-function startMeet(){let r='WORLD'+Math.floor(Math.random()*900000);document.getElementById('jitsi').style.display='block';new JitsiMeetExternalAPI('meet.ffmuc.net',{roomName:r,parentNode:document.getElementById('jitsi'),width:'100%',height:520})}
-boot();
+const locs=["All","Oju Mele","Ewuoliwo","Sabo","Makun","Ajaka","Isale Oko","GRA","High Court","Ogijo","Sotubo"];
+let cur="All";
+let biz=JSON.parse(localStorage.getItem('sagamu_biz')||'null')||[
+{name:"BODE DE WAY UNISEX SALON",cat:"Salon",loc:"Oju Mele",phone:"09167914778",desc:"Unisex salon for Oju Mele - Haircut, weaving, styling. Look fresh!"},
+{name:"Ewuoliwo POS & Transfer",cat:"Finance",loc:"Ewuoliwo",phone:"08000000001",desc:"POS and transfer - Fast service"},
+{name:"Sabo Mama Put",cat:"Food",loc:"Sabo",phone:"08000000002",desc:"Hot food - Rice, Swallow, Soup"},
+{name:"Makun Fashion Hub",cat:"Fashion",loc:"Makun",phone:"08100000003",desc:"Clothes, shoes, bags"}
+];
+function chipRender(){
+ document.getElementById('chips').innerHTML=locs.map(l=>`<button class="chip ${cur===l?'active':''}" onclick="cur='${l}';chipRender();render()">${l}</button>`).join('');
+}
+function render(){
+ let q=document.getElementById('q').value.toLowerCase();
+ let f=biz.filter(b=>{
+  let okLoc=cur==="All"||b.loc===cur;
+  let okQ=!q||b.name.toLowerCase().includes(q)||b.cat.toLowerCase().includes(q)||b.desc.toLowerCase().includes(q)||b.loc.toLowerCase().includes(q);
+  return okLoc&&okQ;
+ });
+ document.getElementById('list').innerHTML=f.map(b=>`
+ <div class="card">
+  <span class="tag t1">${b.cat}</span><span class="tag t2">${b.loc}</span>
+  <div class="name">${b.name}</div>
+  <div class="desc">${b.desc}</div>
+  <div class="phone">📞 ${b.phone} - ${b.loc}, Sagamu</div>
+  <div class="btns">
+   <a class="b wa" href="https://wa.me/234${b.phone.slice(1)}?text=Hello from Sagamu Biz Finder">WhatsApp</a>
+   <a class="b cl" href="tel:${b.phone}">Call</a>
+  </div>
+ </div>`).join('')||`<p style="text-align:center;padding:20px;color:#888">No business found for ${cur}</p>`;
+}
+function saveBiz(){
+ let n=document.getElementById('fName').value,c=document.getElementById('fCat').value,l=document.getElementById('fLoc').value,p=document.getElementById('fPhone').value,d=document.getElementById('fDesc').value;
+ if(!n||!p)return alert('Put name and phone');
+ let nb={name:n,cat:c,loc:l,phone:p,desc:d};
+ biz.unshift(nb);
+ localStorage.setItem('sagamu_biz',JSON.stringify(biz));
+ try{fetch('https://ntfy.sh/sagamu-biz-2026',{method:'POST',body:'ADD:'+JSON.stringify(nb)})}catch{}
+ document.getElementById('form').style.display='none';render();
+ alert('Added! Now everybody go see am.');
+}
+chipRender();render();
+try{
+ let es=new EventSource('https://ntfy.sh/sagamu-biz-2026/sse');
+ es.onmessage=e=>{
+  let d=e.data;
+  if(d.startsWith('ADD:')){try{let b=JSON.parse(d.replace('ADD:',''));if(!biz.find(x=>x.phone===b.phone)){biz.unshift(b);localStorage.setItem('sagamu_biz',JSON.stringify(biz));render();}}catch{}}
+ };
+}catch{}
 </script>
 </body>
 </html>

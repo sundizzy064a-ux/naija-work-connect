@@ -1,77 +1,39 @@
-<div class="biz"><div class="biz-top" style="background:#111;color:white">💈</div><div class="biz-info"><h4>BODE DE WAY UNISA SALON</h4><small>Sagamu, Ogun State, Nigeria • Unisex Salon</small><a href="https://wa.me/2349063211519"><button class="btn">Chat on WhatsApp</button></a></div></div><!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NEW BUSINESS NEW MARKET - WORLDWIDE</title>
 <style>
-body{font-family:Arial;background:#f8f9fa;margin:0;padding:0}
-.header{background:#111;color:white;padding:22px;text-align:center}
-.market-banner{background:#ff6600;color:white;padding:10px;text-align:center;font-weight:bold}
-.pay-bar{background:white;margin:12px;padding:12px;border-radius:12px;text-align:center;box-shadow:0 2px 8px #0001}
+body{font-family:Arial;background:#f8f9fa;margin:0}
+.header{background:#111;color:white;padding:12px;text-align:center}
+.market-banner{background:#ff6600;color:white;padding:8px;text-align:center;font-weight:bold}
+.pay-bar{background:white;margin:12px;padding:10px;border:1px dashed #ff6600;text-align:center;border-radius:8px}
 .search{padding:10px}
-.search input{width:100%;padding:13px;border-radius:25px;border:1px solid #ddd;box-sizing:border-box}
-.cats{display:flex;overflow-x:auto;gap:6px;padding:10px}
-.cats span{background:white;padding:7px 14px;border-radius:20px;border:1px solid #eee;font-size:13px;white-space:nowrap}
+.search input{width:100%;padding:13px;border-radius:20px;border:1px solid #ddd}
+.cats{display:flex;overflow-x:auto;gap:6px;padding:0 10px}
+.cats span{background:white;padding:7px 14px;border-radius:20px;white-space:nowrap;font-size:13px;border:1px solid #ddd}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-.biz{background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 6px #0001}
-.biz-top{height:80px;display:flex;align-items:center;justify-content:center;font-size:36px}
+.biz{background:white;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.biz-top{height:80px;display:flex;align-items:center;justify-content:center;font-size:30px}
 .biz-info{padding:8px}
 .biz-info h4{margin:0;font-size:13px}
-.biz-info small{color:#666;font-size:11px}
-.btn{width:100%;padding:7px;border:none;border-radius:7px;margin-top:5px;font-weight:bold;color:white;font-size:11px;background:#25D366}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#0008;justify-content:center;align-items:center;z-index:99}
-.modal-box{background:white;padding:20px;border-radius:14px;width:90%;max-width:380px;text-align:center}
+.biz-info small{color:#666;font-size:11px;display:block;margin:4px 0}
+.btn{width:100%;padding:7px;background:#111;color:white;border:none;border-radius:6px;margin-top:5px}
 </style>
 </head>
 <body>
-<div class="header"><h2>NEW BIZ<br>NEW MARKET</h2><p style="color:#ffc107;margin:5px">Worldwide Business Directory 🌍</p></div>
-<div class="market-banner">🔥 THIS APP YOU WILL NEED TO PAY ₦1000 TO SIT ON - OPay 9013627287 🔥</div>
-
-<div class="pay-bar">
-<b>Your New Business Don Enter New Market?</b><br>
-<button onclick="openPay()" style="background:#111;color:white;padding:10px 18px;border:none;border-radius:20px;margin-top:6px">➕ ADD YOUR BUSINESS NOW</button>
-</div>
-
-<div class="search"><input id="q" placeholder="Search any country, state, city..." onkeyup="searchB()"></div>
-
-<div class="cats">
-<span onclick="filterC('')">All</span><span onclick="filterC('nigeria')">Nigeria</span><span onclick="filterC('ghana')">Ghana</span><span onclick="filterC('usa')">USA</span><span onclick="filterC('uk')">UK</span><span onclick="filterC('canada')">Canada</span><span onclick="filterC('lagos')">Lagos</span><span onclick="filterC('sagamu')">Sagamu</span>
-</div>
+<div class="header"><h3 style="margin:0">NEW BIZ NEW MARKET 🌍</h3><small>Worldwide Marketplace</small></div>
+<div class="market-banner">THIS APP YOU WILL NEED TO PAY ₦1000 - OPay 9013627287 - WhatsApp 07082883291</div>
+<div class="pay-bar">Add your business worldwide! Pay ₦1000 to OPay 9013627287</div>
+<div class="search"><input placeholder="Search business, location... Nigeria, Ghana, USA, UK..."></div>
+<div class="cats"><span>All</span><span>Nigeria</span><span>Ghana</span><span>USA</span><span>UK</span><span>Canada</span><span>Barbing</span><span>Salon</span><span>Fashion</span></div>
 
 <div class="grid" id="list">
-<div class="biz"><div class="biz-top" style="background:#e8f5e9">💇</div><div class="biz-info"><h4>Mama T Braids</h4><small>Sabo, Sagamu, Nigeria • Beauty</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#fff3e0">✂️</div><div class="biz-info"><h4>Tunde Barber</h4><small>Makun, Sagamu, Nigeria • Barbing</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#e3f2fd">👗</div><div class="biz-info"><h4>Aunty B Fashion</h4><small>Ikeja, Lagos, Nigeria • Fashion</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#fce4ec">🍔</div><div class="biz-info"><h4>Lagos Food Hub</h4><small>Lekki, Lagos, Nigeria • Food</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#f3e5f5">💻</div><div class="biz-info"><h4>Abuja Tech Fix</h4><small>Wuse, Abuja, Nigeria • Tech</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#e0f2f1">🔌</div><div class="biz-info"><h4>PH Electrician</h4><small>Port Harcourt, Nigeria • Electrician</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#fff8e1">🪑</div><div class="biz-info"><h4>Kano Furniture</h4><small>Kano, Nigeria • Furniture</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#e8f5e9">👗</div><div class="biz-info"><h4>Kwame Tailor</h4><small>Accra, Ghana • Fashion</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#fff3e0">💇</div><div class="biz-info"><h4>Accra Beauty</h4><small>Kumasi, Ghana • Beauty</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#e3f2fd">✂️</div><div class="biz-info"><h4>Houston Fade</h4><small>Houston, USA • Barbing</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#fce4ec">🍕</div><div class="biz-info"><h4>NY Pizza</h4><small>New York, USA • Food</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#f3e5f5">💻</div><div class="biz-info"><h4>Atlanta Tech</h4><small>Atlanta, USA • Tech</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#fff8e1">💇</div><div class="biz-info"><h4>London Braids</h4><small>London, UK • Beauty</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#e0f2f1">👔</div><div class="biz-info"><h4>Manchester Suits</h4><small>Manchester, UK • Fashion</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#e8f5e9">🍁</div><div class="biz-info"><h4>Toronto Clean</h4><small>Toronto, Canada • Cleaning</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-<div class="biz"><div class="biz-top" style="background:#fff3e0">🦁</div><div class="biz-info"><h4>SA Safari Tours</h4><small>Johannesburg, South Africa • Travel</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
-</div>
+<div class="biz"><div class="biz-top" style="background:#111;color:white">💈</div><div class="biz-info"><h4>BODE DE WAY UNISA SALON</h4><small>Sagamu, Ogun - Unisex Salon</small><a href="https://wa.me/2349063211519"><button class="btn">Chat on WhatsApp</button></a></div></div>
 
-<div id="payModal" class="modal"><div class="modal-box">
-<h3>🚀 LIST YOUR NEW BUSINESS</h3>
-<p>This app you will need to pay <b>₦1000</b> to sit on</p>
-<div style="background:#fff3e0;padding:12px;border-radius:10px;text-align:left;line-height:1.6">
-<b>OPay:</b> 9013627287<br><b>Name:</b> Abe Sunday Tanimola<br><b>Amount:</b> ₦1000<br>
+<div class="biz"><div class="biz-top">💇</div><div class="biz-info"><h4>Mama T Braids</h4><small>Sabo, Sagamu • Salon</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
+<div class="biz"><div class="biz-top">💈</div><div class="biz-info"><h4>Tunde Barber</h4><small>Makun, Sagamu • Barber</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
+<div class="biz"><div class="biz-top">👗</div><div class="biz-info"><h4>Aunty B Fashion</h4><small>Lagos • Fashion</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
+<div class="biz"><div class="biz-top">🍲</div><div class="biz-info"><h4>Lagos Food Hub</h4><small>Lagos • Food</small><a href="https://wa.me/2347082883291"><button class="btn">Chat</button></a></div></div>
 </div>
-<a href="https://wa.me/2347082883291?text=Hello%20Abe%2C%20I%20don%20pay%20N1000%20for%20New%20Biz%20New%20Market.%20Add%20my%20business%20abeg."><button style="background:#111;color:white;padding:12px;width:100%;border:none;border-radius:10px;margin-top:10px;font-weight:bold">✅ I DON PAY - ADD ME NOW</button></a>
-<br><br><button onclick="closePay()" style="border:none;background:none;color:gray">Close</button>
-</div></div>
-
-<script>
-function openPay(){document.getElementById('payModal').style.display='flex'}
-function closePay(){document.getElementById('payModal').style.display='none'}
-function searchB(){let q=document.getElementById('q').value.toLowerCase();document.querySelectorAll('.biz').forEach(b=>{b.style.display=b.innerText.toLowerCase().includes(q)?'block':'none'})}
-function filterC(c){document.querySelectorAll('.biz').forEach(b=>{b.style.display=c==''||b.innerText.toLowerCase().includes(c)?'block':'none'})}
-</script>
 </body>
 </html>

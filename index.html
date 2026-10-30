@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEWBIZ - Worldwide Market Chat</title>
+<title>NEWBIZ - Worldwide Market Directory & Chat</title>
 <meta name="theme-color" content="#FF6600">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
@@ -11,87 +11,81 @@ body{background:#f0f2f5}
 .top{background:#111;color:#fff;text-align:center;padding:16px}
 .top b{font-size:26px;letter-spacing:1px}
 .top p{font-size:11px;opacity:.7;margin-top:3px}
-.banner{background:#FF6600;color:#fff;text-align:center;padding:9px;font-weight:800;font-size:12px}
+.banner{background:#FF6600;color:#fff;text-align:center;padding:10px;font-weight:800;font-size:12px;letter-spacing:.3px}
 .info{background:#fff;margin:10px;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.06)}
-.info b{font-size:14px}
-.info span{font-size:12px;color:#666;display:block;margin-top:4px}
+.info b{font-size:14px;color:#111}
+.info span{font-size:12px;color:#666;display:block;margin-top:4px;line-height:1.4}
 .search-area{padding:0 10px;display:flex;gap:8px}
 .search-area input{flex:1;padding:13px 18px;border-radius:25px;border:1px solid #ddd;outline:none;font-size:13px;background:#fff}
-.chat-main-btn{background:#111;color:#fff;padding:13px 18px;border-radius:25px;font-weight:800;font-size:12px;border:none;cursor:pointer;display:flex;align-items:center;gap:5px}
+.chat-main-btn{background:#111;color:#fff;padding:13px 18px;border-radius:25px;font-weight:800;font-size:12px;border:none;cursor:pointer;display:flex;align-items:center;gap:6px}
 .live{width:8px;height:8px;background:#00ff00;border-radius:50%;display:inline-block;animation:blink 1s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 .cats{display:flex;gap:7px;padding:10px;overflow-x:auto;scrollbar-width:none}
-.cats div{background:#fff;border:1px solid #ddd;padding:7px 14px;border-radius:20px;font-size:12px;white-space:nowrap}
+.cats div{background:#fff;border:1px solid #ddd;padding:7px 14px;border-radius:20px;font-size:12px;white-space:nowrap;cursor:pointer}
 .cats .active{background:#FF6600;color:#fff;border-color:#FF6600}
 .grid{padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-bottom:110px}
-.card{background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.card{background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);border:1px solid #eee}
 .card .icon{font-size:34px;text-align:center}
-.card h3{font-size:12px;margin:6px 0 2px;line-height:1.2}
+.card h3{font-size:12px;margin:6px 0 2px;line-height:1.2;color:#111}
 .card small{font-size:10px;color:#777;display:block;line-height:1.3}
 .card-btns{display:flex;gap:5px;margin-top:8px}
 .btn{flex:1;text-align:center;padding:8px;border-radius:20px;font-weight:800;font-size:10px;text-decoration:none;cursor:pointer;border:none}
 .btn-orange{background:#FF6600;color:#fff}
 .btn-black{background:#111;color:#fff}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#111;display:flex;padding:10px;z-index:10}
-.bottom a{flex:1;text-align:center;color:#fff;text-decoration:none;font-weight:800;font-size:12px;padding:10px;border-radius:20px}
+.bottom a{flex:1;text-align:center;color:#fff;text-decoration:none;font-weight:800;font-size:12px;padding:10px;border-radius:20px;cursor:pointer}
 .bottom .add{background:#FF6600;margin-left:8px}
-
-/* CHAT BOX - REAL */
 #chatBox{position:fixed;bottom:70px;left:8px;right:8px;max-width:420px;margin:auto;background:#fff;border-radius:18px;box-shadow:0 15px 50px rgba(0,0,0,.35);z-index:100;display:none;flex-direction:column;height:75vh;border:1px solid #ddd;overflow:hidden}
 #chatHead{background:#111;color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
 #chatHead b{font-size:14px}
 #online{font-size:11px;opacity:.8}
 #chatMsgs{flex:1;overflow-y:auto;padding:10px;background:#e5ddd5;display:flex;flex-direction:column;gap:6px}
-.msg{max-width:78%;padding:8px 12px;border-radius:12px;font-size:13px;line-height:1.3;position:relative}
+.msg{max-width:78%;padding:8px 12px;border-radius:12px;font-size:13px;line-height:1.3;position:relative;word-break:break-word}
 .msg.me{background:#dcf8c6;align-self:flex-end;border-bottom-right-radius:2px}
 .msg.other{background:#fff;align-self:flex-start;border-bottom-left-radius:2px;box-shadow:0 1px 1px rgba(0,0,0,.1)}
 .msg small{display:block;font-size:9px;color:#888;margin-top:3px}
 #chatInputBox{display:flex;padding:8px;background:#f0f0f0;gap:6px;align-items:center}
 #chatInputBox input{flex:1;padding:11px 14px;border-radius:20px;border:1px solid #ddd;outline:none;font-size:13px}
 #chatInputBox button{background:#FF6600;color:#fff;border:none;padding:11px 16px;border-radius:20px;font-weight:800;cursor:pointer}
-#nameModal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
-#payModal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
+#nameModal, #payModal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
 .modalBox{background:#fff;border-radius:18px;padding:22px;text-align:center;max-width:320px;width:100%}
-.modalBox h3{margin-bottom:8px}
+.modalBox h3{margin-bottom:8px;color:#111}
 .modalBox p{font-size:13px;color:#555;margin-bottom:12px;line-height:1.4}
-.modalBox input{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-bottom:12px;outline:none}
-.modalBtn{width:100%;padding:12px;border-radius:25px;border:none;font-weight:800;cursor:pointer;margin-top:6px}
+.modalBox input{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-bottom:12px;outline:none;font-size:14px}
+.modalBtn{width:100%;padding:12px;border-radius:25px;border:none;font-weight:800;cursor:pointer;margin-top:6px;font-size:13px}
 </style>
 </head>
 <body>
 <div class="top"><b>NEWBIZ</b><p>WORLDWIDE MARKET DIRECTORY & CHAT</p></div>
-<div class="banner">LIVE MARKET CHAT - PEOPLE DEY CHAT INSIDE NOW!</div>
-<div class="info"><b>Find Business, Chat Each Other, Get Customers</b><span>Chat with people inside app about market. Contact admin to verify your business.</span></div>
+<div class="banner">LIVE MARKET CHAT - CONNECT WITH BUSINESSES WORLDWIDE</div>
+<div class="info"><b>Discover Businesses, Chat With Owners, Get Customers</b><span>Connect with verified businesses and customers worldwide. Join the live chat and contact admin to verify your business.</span></div>
 <div class="search-area"><input id="search" placeholder="Search business, city, country..." onkeyup="filterBiz()"><button class="chat-main-btn" onclick="openChat()"><span class="live"></span> CHAT</button></div>
 <div class="cats"><div class="active">All</div><div>Nigeria</div><div>Ghana</div><div>USA</div><div>UK</div><div>Canada</div><div>Germany</div></div>
 
 <div class="grid" id="bizGrid">
-<div class="card"><div class="icon">💈</div><h3>Bode De Way Salon</h3><small>Barber • Makun, Sagamu<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Bode Salon')">Chat</button><button class="btn btn-orange" onclick="showPay('Bode Salon')">Admin</button></div></div>
-<div class="card"><div class="icon">💇‍♀️</div><h3>Mama T Braids</h3><small>Salon • Sabo, Sagamu<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Mama T')">Chat</button><button class="btn btn-orange" onclick="showPay('Mama T')">Admin</button></div></div>
-<div class="card"><div class="icon">✂️</div><h3>Tunde Barber</h3><small>Barber • Sabo<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Tunde')">Chat</button><button class="btn btn-orange" onclick="showPay('Tunde')">Admin</button></div></div>
-<div class="card"><div class="icon">👗</div><h3>Lagos Fashion Hub</h3><small>Fashion • Ikeja<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Fashion')">Chat</button><button class="btn btn-orange" onclick="showPay('Fashion')">Admin</button></div></div>
-<div class="card"><div class="icon">🍔</div><h3>Iya Basira Food</h3><small>Food • Makun<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Iya Basira')">Chat</button><button class="btn btn-orange" onclick="showPay('Iya Basira')">Admin</button></div></div>
-<div class="card"><div class="icon">📱</div><h3>Phone Gadgets</h3><small>Phones • Sabo<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Gadgets')">Chat</button><button class="btn btn-orange" onclick="showPay('Gadgets')">Admin</button></div></div>
-<div class="card"><div class="icon">🚗</div><h3>God Is Good Motors</h3><small>Transport • Lagos<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Motors')">Chat</button><button class="btn btn-orange" onclick="showPay('Motors')">Admin</button></div></div>
-<div class="card"><div class="icon">🏠</div><h3>Elite Properties</h3><small>Real Estate • Accra<br>Ghana</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Elite')">Chat</button><button class="btn btn-orange" onclick="showPay('Elite')">Admin</button></div></div>
-<div class="card"><div class="icon">💻</div><h3>US Tech Repair</h3><small>Tech • Houston<br>USA</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('US Tech')">Chat</button><button class="btn btn-orange" onclick="showPay('US Tech')">Admin</button></div></div>
-<div class="card"><div class="icon">🎓</div><h3>London Study</h3><small>Education • London<br>UK</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('London')">Chat</button><button class="btn btn-orange" onclick="showPay('London')">Admin</button></div></div>
-<div class="card"><div class="icon">👨‍⚕️</div><h3>Toronto Clinic</h3><small>Health • Toronto<br>Canada</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Toronto')">Chat</button><button class="btn btn-orange" onclick="showPay('Toronto')">Admin</button></div></div>
-<div class="card"><div class="icon">🔧</div><h3>Berlin Auto</h3><small>Mechanic • Berlin<br>Germany</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Berlin')">Chat</button><button class="btn btn-orange" onclick="showPay('Berlin')">Admin</button></div></div>
+<div class="card"><div class="icon">💈</div><h3>Bode De Way Salon</h3><small>Barber • Makun, Sagamu<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Bode De Way Salon')">Chat</button><button class="btn btn-orange" onclick="showPay('Bode De Way Salon')">Admin</button></div></div>
+<div class="card"><div class="icon">💇‍♀️</div><h3>Mama T Braids</h3><small>Salon • Sabo, Sagamu<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Mama T Braids')">Chat</button><button class="btn btn-orange" onclick="showPay('Mama T Braids')">Admin</button></div></div>
+<div class="card"><div class="icon">✂️</div><h3>Tunde Barber</h3><small>Barber • Sabo<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Tunde Barber')">Chat</button><button class="btn btn-orange" onclick="showPay('Tunde Barber')">Admin</button></div></div>
+<div class="card"><div class="icon">👗</div><h3>Lagos Fashion Hub</h3><small>Fashion • Ikeja<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Lagos Fashion Hub')">Chat</button><button class="btn btn-orange" onclick="showPay('Lagos Fashion Hub')">Admin</button></div></div>
+<div class="card"><div class="icon">🍔</div><h3>Iya Basira Food</h3><small>Food • Makun<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Iya Basira Food')">Chat</button><button class="btn btn-orange" onclick="showPay('Iya Basira Food')">Admin</button></div></div>
+<div class="card"><div class="icon">📱</div><h3>Phone Gadgets</h3><small>Phones • Sabo<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Phone Gadgets')">Chat</button><button class="btn btn-orange" onclick="showPay('Phone Gadgets')">Admin</button></div></div>
+<div class="card"><div class="icon">🚗</div><h3>God Is Good Motors</h3><small>Transport • Lagos<br>Nigeria</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('God Is Good Motors')">Chat</button><button class="btn btn-orange" onclick="showPay('God Is Good Motors')">Admin</button></div></div>
+<div class="card"><div class="icon">🏠</div><h3>Elite Properties</h3><small>Real Estate • Accra<br>Ghana</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Elite Properties')">Chat</button><button class="btn btn-orange" onclick="showPay('Elite Properties')">Admin</button></div></div>
+<div class="card"><div class="icon">💻</div><h3>US Tech Repair</h3><small>Tech • Houston<br>USA</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('US Tech Repair')">Chat</button><button class="btn btn-orange" onclick="showPay('US Tech Repair')">Admin</button></div></div>
+<div class="card"><div class="icon">🎓</div><h3>London Study</h3><small>Education • London<br>UK</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('London Study')">Chat</button><button class="btn btn-orange" onclick="showPay('London Study')">Admin</button></div></div>
+<div class="card"><div class="icon">👨‍⚕️</div><h3>Toronto Clinic</h3><small>Health • Toronto<br>Canada</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Toronto Clinic')">Chat</button><button class="btn btn-orange" onclick="showPay('Toronto Clinic')">Admin</button></div></div>
+<div class="card"><div class="icon">🔧</div><h3>Berlin Auto</h3><small>Mechanic • Berlin<br>Germany</small><div class="card-btns"><button class="btn btn-black" onclick="openChat('Berlin Auto')">Chat</button><button class="btn btn-orange" onclick="showPay('Berlin Auto')">Admin</button></div></div>
 </div>
 
-<!-- REAL CHAT BOX -->
 <div id="chatBox">
 <div id="chatHead"><div><b id="chatTitle">Market Chat</b><div id="online"><span class="live"></span> <span id="onlineCount">12</span> people online</div></div><span onclick="closeChat()" style="font-size:22px;cursor:pointer">✕</span></div>
 <div id="chatMsgs"></div>
-<div id="chatInputBox"><input id="chatInput" placeholder="Type message about market..."><button onclick="sendMsg()">Send</button></div>
+<div id="chatInputBox"><input id="chatInput" placeholder="Type your message..."><button onclick="sendMsg()">Send</button></div>
 </div>
 
-<!-- NAME MODAL -->
-<div id="nameModal"><div class="modalBox"><h3>Join Market Chat</h3><p>Enter your name to chat with other people inside app about market</p><input id="userNameInput" placeholder="Your name e.g. Bode"><button class="modalBtn" style="background:#111;color:#fff" onclick="saveName()">Join Chat</button></div></div>
+<div id="nameModal"><div class="modalBox"><h3>Join Market Chat</h3><p>Enter your name to join the live discussion and connect with businesses and customers.</p><input id="userNameInput" placeholder="Your name, e.g., James"><button class="modalBtn" style="background:#111;color:#fff" onclick="saveName()">Join Chat</button></div></div>
 
-<!-- PAY MODAL - SMALL ACCOUNT HIDDEN -->
-<div id="payModal" onclick="hidePay()"><div class="modalBox" onclick="event.stopPropagation()"><h3>Contact Admin</h3><p>To verify business and get customers, chat admin on WhatsApp. Payment details private.</p><p style="font-size:11px;color:#888">OPay: <b style="color:#111">9013627287</b></p><a id="waLink" href="#" style="display:block;background:#25D366;color:#fff;padding:12px;border-radius:25px;text-decoration:none;font-weight:800;margin:10px 0">WhatsApp Admin</a><button class="modalBtn" style="background:#eee" onclick="hidePay()">Close</button></div></div>
+<div id="payModal" onclick="hidePay()"><div class="modalBox" onclick="event.stopPropagation()"><h3>Contact Admin</h3><p>To verify your business and get customers, contact the admin on WhatsApp. Payment information will be shared privately.</p><p style="font-size:11px;color:#888;margin:8px 0">OPay: <b style="color:#111">9013627287</b></p><a id="waLink" href="#" style="display:block;background:#25D366;color:#fff;padding:12px;border-radius:25px;text-decoration:none;font-weight:800;margin:10px 0">Contact Admin on WhatsApp</a><button class="modalBtn" style="background:#eee" onclick="hidePay()">Close</button></div></div>
 
 <div class="bottom"><a onclick="openChat()">💬 MARKET CHAT</a><a class="add" onclick="showPay('Add Business')">+ ADD BUSINESS</a></div>
 
@@ -99,15 +93,13 @@ body{background:#f0f2f5}
 let userName = localStorage.getItem('newbiz_name') || '';
 let messages = JSON.parse(localStorage.getItem('newbiz_msgs') || '[]');
 let chatWith = 'Market';
-
 if(messages.length==0){
  messages=[
-  {name:'Admin',text:'Welcome to NEWBIZ Market Chat! 🎉 People fit chat each other here about market, business, everything!',time:'now',me:false},
-  {name:'Mama T',text:'Hello everyone, I dey sell braids for Sabo, who need?',time:'2m ago',me:false},
-  {name:'Bode',text:'I dey available for haircut for Makun now',time:'5m ago',me:false}
+  {name:'Admin',text:'Welcome to NEWBIZ Market Chat! Connect with businesses and customers worldwide.',time:'now',me:false},
+  {name:'Mama T',text:'Hello everyone, I offer braiding services in Sabo. Who needs a style today?',time:'2m ago',me:false},
+  {name:'Bode',text:'Barber services available now in Makun. Walk in or chat to book.',time:'5m ago',me:false}
  ];
 }
-
 function renderMsgs(){
  let box=document.getElementById('chatMsgs');
  box.innerHTML='';
@@ -120,7 +112,6 @@ function renderMsgs(){
  box.scrollTop=box.scrollHeight;
  document.getElementById('onlineCount').innerText=12+Math.floor(Math.random()*8);
 }
-
 function openChat(name){
  chatWith=name||'Market';
  if(!userName){document.getElementById('nameModal').style.display='flex';return;}
@@ -135,7 +126,7 @@ function saveName(){
  userName=n; localStorage.setItem('newbiz_name',n);
  document.getElementById('nameModal').style.display='none';
  openChat(chatWith);
- messages.push({name:userName,text:'Hello everyone! I just joined market chat 👋',time:'now',me:true});
+ messages.push({name:userName,text:'Hello everyone! I just joined the market chat.',time:'now',me:true});
  saveMsgs(); renderMsgs();
 }
 function sendMsg(){
@@ -143,13 +134,12 @@ function sendMsg(){
  let text=input.value.trim(); if(!text) return;
  messages.push({name:userName||'You',text:text,time:'now',me:true});
  input.value=''; saveMsgs(); renderMsgs();
- // auto reply to make it look live
  setTimeout(()=>{
   let replies=[
-   'Nice! Contact admin to verify your business',
-   'I see your message, we dey market together!',
-   'How much be your service? I fit need am',
-   'Welcome! Make we do business together'
+   'Thank you for your message. Please contact admin to verify your business.',
+   'Great! Let us connect and do business together.',
+   'What services do you offer? I may need it.',
+   'Welcome! Feel free to ask about any business.'
   ];
   let randomName=['Mama T','Bode','Tunde','Iya Basira'][Math.floor(Math.random()*4)];
   messages.push({name:randomName,text:replies[Math.floor(Math.random()*replies.length)],time:'now',me:false});
@@ -157,17 +147,14 @@ function sendMsg(){
  },1200);
 }
 function saveMsgs(){localStorage.setItem('newbiz_msgs',JSON.stringify(messages.slice(-50)));}
-
 function showPay(biz){
  let wa=document.getElementById('waLink');
  wa.href='https://wa.me/2347082883291?text=Hello%20Admin,%20I%20want%20to%20verify%20'+encodeURIComponent(biz)+'%20on%20NEWBIZ';
  document.getElementById('payModal').style.display='flex';
 }
 function hidePay(){document.getElementById('payModal').style.display='none';}
-
 document.getElementById('chatInput').addEventListener('keypress',e=>{if(e.key==='Enter') sendMsg();});
 document.getElementById('userNameInput').addEventListener('keypress',e=>{if(e.key==='Enter') saveName();});
-
 function filterBiz(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.card').forEach(c=>{c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none';});}
 renderMsgs();
 </script>

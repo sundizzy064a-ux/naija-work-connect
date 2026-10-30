@@ -4,109 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEWBIZ - Worldwide Business Directory</title>
-<meta name="theme-<meta property="og:title" content="NEWBIZ - The New Market Worldwide">
+<meta name="theme-color" content="#FF6600">
+<meta property="og:title" content="NEWBIZ - The New Market Worldwide">
 <meta property="og:description" content="List your business worldwide for ₦2000 only. Pay to OPay 9013627287. Contact Admin WhatsApp 07082883291 to be verified and start getting customers!">
 <meta property="og:image" content="https://via.placeholder.com/512x512/FF6600/FFFFFF?text=NEWBIZ">
-<meta property="og:url" content="https://sundizzy064a-ux.github.io/naija-work-connect/">color" content="#FF6600">
-<meta name="description" content="NEWBIZ - The New Market. Worldwide Business Directory. Contact Admin First To Be Listed.">
+<meta property="og:url" content="https://sundizzy064a-ux.github.io/naija-work-connect/">
+<meta name="description" content="NEWBIZ - The New Market. Worldwide Business Directory.">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}
 body{background:#f8f9fa;color:#222;line-height:1.5}
 .header{background:#111;color:white;padding:24px;text-align:center}
-.header b{color:#FF6600;font-size:24px;letter-spacing:1px;display:block}
+.header b{color:#FF6600;font-size:26px;letter-spacing:1px;display:block}
 .header small{opacity:0.8;font-size:13px}
-.market-banner{background:#FF6600;color:white;padding:12px;text-align:center;font-weight:600;font-size:14px;letter-spacing:0.3px}
+.market-banner{background:#FF6600;color:white;padding:12px;text-align:center;font-weight:600;font-size:14px}
 .pay-bar{background:white;margin:14px;padding:16px;border-radius:14px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.08);border:1.5px solid #FF6600}
 .pay-bar .price{color:#FF6600;font-size:19px;font-weight:800;display:block;margin-bottom:6px}
 .pay-bar .note{font-size:13px;color:#333;line-height:1.4}
 .search{padding:0 14px 12px}
 .search input{width:100%;padding:14px 20px;border-radius:30px;border:1.5px solid #ddd;outline:none;font-size:15px;background:white}
 .search input:focus{border-color:#FF6600}
-.cats{display:flex;overflow-x:auto;gap:8px;padding:10px 14px;scrollbar-width:none}
-.cats::-webkit-scrollbar{display:none}
-.cats span{background:white;padding:8px 16px;border-radius:20px;border:1px solid #e5e5e5;font-size:13px;white-space:nowrap;cursor:pointer;transition:0.2s}
-.cats span.active{background:#FF6600;color:white;border-color:#FF6600;font-weight:600}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px;padding-bottom:95px}
-.biz{background:white;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,0.06);border:1px solid #f0f0f0;transition:0.2s}
-.biz-top{height:90px;display:flex;align-items:center;justify-content:center;font-size:40px;background:linear-gradient(135deg,#fff3e6 0%,#ffe8cc 100%)}
-.biz-info{padding:12px}
-.biz-info h4{font-size:13.5px;margin-bottom:4px;line-height:1.3;color:#111}
-.biz-info small{color:#666;font-size:11.5px}
-.btn{width:100%;padding:10px;border:none;border-radius:9px;margin-top:8px;font-weight:700;color:white;font-size:11.5px;background:#FF6600;cursor:pointer;letter-spacing:0.2px}
-.btn:hover{background:#e65c00}
-.add{position:fixed;bottom:0;left:0;right:0;background:#111;color:white;padding:18px;text-align:center;font-weight:700;font-size:15px;cursor:pointer;z-index:20;letter-spacing:0.3px}
+.cats{display:flex;overflow-x:auto;gap:8px;padding:10px 14px}
+.cat{white-space:nowrap;padding:8px 16px;border-radius:20px;background:white;border:1px solid #ddd;font-size:13px;cursor:pointer}
+.cat.active{background:#111;color:white;border-color:#111}
+.grid{padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);padding:14px}
+.card h3{font-size:15px;margin-bottom:4px}
+.card p{font-size:12px;color:#666}
+.add-btn{position:fixed;bottom:20px;right:20px;background:#FF6600;color:white;border:none;padding:14px 22px;border-radius:30px;font-weight:700;font-size:15px;box-shadow:0 4px 12px rgba(255,102,0,0.4)}
 </style>
 </head>
 <body>
-<div class="header"><b>NEWBIZ</b><small>WORLDWIDE BUSINESS DIRECTORY - THE NEW MARKET</small></div>
-<div class="market-banner">VERIFIED WORLDWIDE LISTING - CONTACT ADMIN FIRST</div>
+<div class="header">
+<b>NEWBIZ</b>
+<small>THE NEW MARKET WORLDWIDE</small>
+</div>
+<div class="market-banner">🌍 LIST YOUR BUSINESS WORLDWIDE TODAY</div>
+
 <div class="pay-bar">
-<span class="price">Listing Fee: ₦2000 Only - Pay to OPay: 9013627287</span>
-<span class="note">To be listed and start receiving customers, you must contact the Admin first for verification.<br><strong>Admin WhatsApp: 07082883291</strong></span>
+<span class="price">₦2000 ONLY TO LIST YOUR BUSINESS</span>
+<span class="note">Pay to OPay 9013627287<br>Contact Admin WhatsApp 07082883291 to be verified and start getting customers!</span>
 </div>
-<div class="search"><input id="searchBox" placeholder="Search by country, state, city, or business name..." oninput="filterBiz()"></div>
-<div class="cats" id="cats"></div>
-<div class="grid" id="grid"></div>
-<div class="add" onclick="addBiz()">+ ADD YOUR BUSINESS - ₦2000 VERIFICATION REQUIRED</div>
 
-<script>
-let businesses=[
-{name:"Bode De Way Unisa Salon",cat:"Barber",loc:"Makun, Sagamu",country:"Nigeria",state:"Ogun",city:"Sagamu",emoji:"💈"},
-{name:"Mama T Braids",cat:"Salon",loc:"Sabo, Sagamu",country:"Nigeria",state:"Ogun",city:"Sagamu",emoji:"💇‍♀️"},
-{name:"Tunde Barber Shop",cat:"Barber",loc:"Sabo, Sagamu",country:"Nigeria",state:"Ogun",city:"Sagamu",emoji:"✂️"},
-{name:"Lagos Fashion Hub",cat:"Fashion",loc:"Ikeja, Lagos",country:"Nigeria",state:"Lagos",city:"Lagos",emoji:"👗"},
-{name:"Accra Tech Hub",cat:"Technology",loc:"East Legon, Accra",country:"Ghana",state:"Greater Accra",city:"Accra",emoji:"💻"},
-{name:"London Foods",cat:"Restaurant",loc:"Brixton, London",country:"United Kingdom",state:"London",city:"London",emoji:"🍔"},
-{name:"New York Tailors",cat:"Tailor",loc:"Brooklyn, New York",country:"USA",state:"New York",city:"New York",emoji:"🧵"},
-{name:"Toronto Cuts",cat:"Barber",loc:"Downtown, Toronto",country:"Canada",state:"Ontario",city:"Toronto",emoji:"✂️"}
-];
-let cats=["All","Nigeria","Ghana","USA","UK","Canada","Ogun","Lagos","Sagamu","Barber","Salon","Fashion","Food","Technology","Tailor"];
-let active="All";
+<div class="search">
+<input type="text" placeholder="Search businesses, services...">
+</div>
 
-function renderCats(){
-document.getElementById('cats').innerHTML=cats.map(c=>`<span class="${c===active?'active':''}" onclick="setCat('${c}')">${c}</span>`).join('');
-}
-function setCat(c){active=c;renderCats();filterBiz();}
-function filterBiz(){
-let q=document.getElementById('searchBox').value.toLowerCase();
-let f=businesses.filter(b=>{
-let matchCat=active==="All"||b.country===active||b.state===active||b.city===active||b.cat===active;
-let matchSearch=q===""||(b.name+" "+b.cat+" "+b.loc+" "+b.country+" "+b.state+" "+b.city).toLowerCase().includes(q);
-return matchCat&&matchSearch;
-});
-document.getElementById('grid').innerHTML=f.map(b=>`
-<div class="biz">
-<div class="biz-top">${b.emoji}</div>
-<div class="biz-info">
-<h4>${b.name}</h4>
-<small>${b.cat} • ${b.loc}</small><br>
-<small>${b.country}</small>
-<button class="btn" onclick="contactAdmin('${b.name.replace(/'/g," ")}')">Contact Admin - ₦2000</button>
+<div class="cats">
+<div class="cat active">All</div>
+<div class="cat">Salon</div>
+<div class="cat">Food</div>
+<div class="cat">Fashion</div>
+<div class="cat">Repair</div>
+<div class="cat">Other</div>
 </div>
+
+<div class="grid">
+<div class="card"><h3>Bode De Way Unisex Salon</h3><p>Professional haircut & styling</p></div>
+<div class="card"><h3>Mama T Braids</h3><p>Beautiful braids & weaves</p></div>
 </div>
-`).join('');
-}
-function contactAdmin(bizName){
-let admin="2347082883291";
-let msg=`Hello Admin, I am interested in ${bizName} on NEWBIZ Directory. I would like to be connected. To be listed and get customers, I understand I must contact you first. My name is: `;
-window.open(`https://wa.me/${admin}?text=${encodeURIComponent(msg)}`,'_blank');
-}
-function addBiz(){
-let name=prompt("Enter Your Business Name:");
-if(!name)return;
-let cat=prompt("Enter Business Category (e.g., Barber, Fashion, Food):")||"Business";
-let city=prompt("Enter City:")||"Sagamu";
-let state=prompt("Enter State / Region:")||"Ogun";
-let country=prompt("Enter Country:")||"Nigeria";
-businesses.unshift({name,cat,loc:city,country,state,city,emoji:"🏪"});
-filterBiz();
-let admin="2347082883291";
-let msg=`NEW BUSINESS LISTING REQUEST - NEWBIZ%0A%0ABusiness Name: ${name}%0ACategory: ${cat}%0ACity: ${city}%0AState: ${state}%0ACountry: ${country}%0A%0AI have paid the listing fee of ₦2000 to OPay 9013627287. Please verify and add my business. I understand I must contact the admin first to receive customers.%0A%0AMy WhatsApp Number:`;
-alert("Business added locally! Please send proof of ₦2000 payment to OPay 9013627287 via WhatsApp to Admin: 07082883291 for official verification and worldwide listing.");
-window.open(`https://wa.me/${admin}?text=${msg}`,'_blank');
-}
-renderCats();
-filterBiz();
-</script>
+
+<button class="add-btn">+ Add Business</button>
 </body>
 </html>

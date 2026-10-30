@@ -3,113 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NG-MEET - Perfect Real Chat</title>
+<title>Naija Work Connect - Real People</title>
 <script src="https://meet.ffmuc.net/external_api.js"></script>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,system-ui;background:#f0f2f5}
-.top{position:sticky;top:0;background:#0a7cff;color:#fff;padding:14px;text-align:center;font-weight:900}
-.tabs{display:flex;gap:6px;padding:8px;background:#fff}
-.tab{flex:1;padding:12px;border-radius:10px;border:1px solid #ddd;background:#fff;font-weight:700}
-.tab.active{background:#0a7cff;color:#fff}
-.card{background:#fff;margin:10px;border-radius:14px;padding:12px;box-shadow:0 2px 8px #0001}
-input,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0;font-size:15px}
-.btn{width:100%;padding:12px;border:none;border-radius:10px;background:#0a7cff;color:#fff;font-weight:800}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui;display:flex;height:100vh;background:#f0f2f5}
+.left{width:260px;background:#111827;color:#fff;padding:14px;display:flex;flex-direction:column;gap:10px}
+.left h2{margin:0;font-size:18px;color:#0a7cff}
+.left button{width:100%;padding:12px;border-radius:10px;border:0;background:#1f2937;color:#fff;text-align:left;font-weight:700}
+.left button.active{background:#0a7cff}
+.right{flex:1;overflow:auto}
+.top{background:#0a7cff;color:#fff;padding:12px;text-align:center;font-weight:900}
+.card{background:#fff;margin:12px;border-radius:14px;padding:14px;box-shadow:0 2px 8px #0001}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0}
+.btn{width:100%;padding:12px;border:0;border-radius:10px;background:#0a7cff;color:#fff;font-weight:800}
 .btn-green{background:#22c55e}
-.badge{display:inline-block;padding:6px 10px;background:#e8f0ff;border-radius:20px;margin:4px;font-size:13px}
-#messages{height:300px;overflow:auto;background:#f9fbff;border-radius:10px;padding:10px}
-.msg{padding:8px 10px;margin:6px 0;background:#fff;border-radius:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.p-card{background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 1px 4px #0001}
+.p-card img{width:80px;height:80px;border-radius:50%;object-fit:cover}
+.badge{background:#e8f0ff;padding:5px 8px;border-radius:20px;font-size:12px;display:inline-block;margin:2px}
+#messages{height:320px;overflow:auto;background:#f9fbff;border-radius:10px;padding:8px}
+.msg{padding:8px;margin:5px 0;background:#fff;border-radius:8px}
 .me{background:#0a7cff;color:#fff;text-align:right}
-.post{padding:10px;border-top:1px solid #eee}
-.small{font-size:12px;color:#666}
-#jitsi{width:100%;height:500px;display:none;background:#000;border-radius:12px;margin-top:10px}
+#jitsi{width:100%;height:500px;display:none;background:#000;border-radius:12px}
+@media(max-width:700px){body{flex-direction:column}.left{width:100%;flex-direction:row;overflow:auto}.left h2{display:none}}
 </style>
 </head>
 <body>
-<div class="top">NG-MEET 🇳🇬 PERFECT - Real People Only</div>
+<div class="left">
+<h2>🇳🇬 Naija Connect</h2>
+<button id="m-home" class="active" onclick="show('home')">🏠 Home</button>
+<button id="m-people" onclick="show('people')">👥 Meet New People</button>
+<button id="m-chat" onclick="show('chat')">💬 Chat</button>
+<button id="m-meet" onclick="show('meet')">📹 Meet</button>
+<button id="m-profile" onclick="show('profile')">👤 My Profile</button>
+<div style="margin-top:auto">
+<div id="myMini" style="display:flex;gap:8px;align-items:center"></div>
+<button onclick="editProfile()" style="margin-top:8px;background:#374151">✏️ Edit Profile</button>
+</div>
+</div>
+
+<div class="right">
+<div class="top">Real People Only - No Bots - Legit Chat</div>
 
 <div id="auth" class="card">
-<h3>Join Now - Real People Only</h3>
-<input id="uName" placeholder="Your Name e.g Ola">
-<input id="uEmail" placeholder="Email e.g ola@gmail.com">
-<button class="btn" onclick="doJoin()">Sign Up & Enter</button>
-<p class="small">Anybody wey sign up go appear online, no bot! Chat live!</p>
+<h2>Create Profile - Join Real Village</h2>
+<input id="aName" placeholder="Full Name">
+<input id="aEmail" placeholder="Email">
+<input id="aDob" type="date">
+<select id="aWork">
+<option value="">Select Work Type</option>
+<option>Artist</option><option>Plumber</option><option>Electrician</option>
+<option>Tailor</option><option>Barber</option><option>Makeup Artist</option>
+<option>Photographer</option><option>Builder</option><option>Teacher</option>
+<option>Developer</option><option>Student</option><option>Other Worker</option>
+</select>
+<textarea id="aBio" placeholder="About you - wetin you dey do?"></textarea>
+<input id="aPhoto" type="file" accept="image/*">
+<label><input type="checkbox" id="aRobot"> I confirm I am not a robot, DOB correct</label>
+<button class="btn" onclick="doSignup()">Create Account & Join Village</button>
+<p style="font-size:12px;color:#666">Photo go show outside for everybody. Anybody wey sign up go see you live.</p>
 </div>
 
 <div id="app" style="display:none">
-<div class="tabs">
-<button id="tb1" class="tab active" onclick="showTab('home')">Home</button>
-<button id="tb2" class="tab" onclick="showTab('chat')">Chat</button>
-<button id="tb3" class="tab" onclick="showTab('meet')">Meet</button>
-</div>
-
-<div id="homeTab" class="card">
-<textarea id="postTxt" placeholder="Wetin dey your mind?"></textarea>
-<button class="btn" onclick="doPost()">Post</button>
+<div id="homeSec" class="card">
+<h3>Welcome <span id="wName"></span> 👋</h3>
+<p>People online: <b id="onlineCount">0</b></p>
 <div id="feed"></div>
+<textarea id="postTxt" placeholder="Post something..."></textarea>
+<button class="btn" onclick="doPost()">Post</button>
 </div>
 
-<div id="chatTab" class="card" style="display:none">
-<div>Welcome <b id="myName"></b> | Online: <b id="onlineCount">1</b></div>
+<div id="peopleSec" class="card" style="display:none">
+<h3>Meet New People - Workers & Artists</h3>
+<div id="peopleGrid" class="grid"></div>
+</div>
+
+<div id="chatSec" class="card" style="display:none">
 <div id="users"></div>
 <div id="messages"></div>
-<input id="chatInput" placeholder="Type message...">
-<button class="btn btn-green" onclick="sendChat()">Send Live</button>
+<input id="chatInput" placeholder="Type message to village...">
+<button class="btn btn-green" onclick="sendChat()">Send to Everybody</button>
 </div>
 
-<div id="meetTab" class="card" style="display:none">
+<div id="meetSec" class="card" style="display:none">
 <button class="btn btn-green" onclick="startMeet()">Start Video Meeting</button>
 <div id="jitsi"></div>
+</div>
+
+<div id="profileSec" class="card" style="display:none">
+<h3>My Profile</h3>
+<div id="myFullProfile"></div>
+</div>
 </div>
 </div>
 
 <script>
-const TOPIC='ng-meet-perfect-ola-2026-live';
-let myName=localStorage.getItem('ng_name')||'';
-let posts=JSON.parse(localStorage.getItem('ng_posts')||'[]');
+const TOPIC='naija-work-connect-village-2026';
+let me=JSON.parse(localStorage.getItem('naija_me')||'null');
+let posts=JSON.parse(localStorage.getItem('naija_posts')||'[]');
+let people=JSON.parse(localStorage.getItem('naija_people')||'[]');
 let onlineSet=new Set();
 
-function doJoin(){
- let n=document.getElementById('uName').value.trim();
- let e=document.getElementById('uEmail').value.trim();
- if(!n||!e){alert('Put name and email');return;}
- localStorage.setItem('ng_name',n);
- localStorage.setItem('ng_email',e);
- myName=n; boot();
+function doSignup(){
+ let name=document.getElementById('aName').value.trim();
+ let email=document.getElementById('aEmail').value.trim();
+ let dob=document.getElementById('aDob').value;
+ let work=document.getElementById('aWork').value;
+ let bio=document.getElementById('aBio').value.trim();
+ let robot=document.getElementById('aRobot').checked;
+ let file=document.getElementById('aPhoto').files[0];
+ if(!name||!email||!dob||!work||!robot){alert('Fill name, email, DOB, work type and tick robot check');return;}
+ if(!file){alert('Add profile photo');return;}
+ let reader=new FileReader();
+ reader.onload=e=>{
+  let photo=e.target.result;
+  let user={name,email,dob,work,bio,photo,time:Date.now()};
+  localStorage.setItem('naija_me',JSON.stringify(user));
+  people.unshift(user);
+  localStorage.setItem('naija_people',JSON.stringify(people));
+  me=user; boot(); 
+  fetch(`https://ntfy.sh/${TOPIC}`,{method:'POST',body:`JOIN:${JSON.stringify(user)}`});
+ };
+ reader.readAsDataURL(file);
 }
+
 function boot(){
- if(!localStorage.getItem('ng_name')) return;
- myName=localStorage.getItem('ng_name');
+ if(!localStorage.getItem('naija_me')) return;
+ me=JSON.parse(localStorage.getItem('naija_me'));
  document.getElementById('auth').style.display='none';
  document.getElementById('app').style.display='block';
- document.getElementById('myName').innerText=myName;
- renderFeed();
- onlineSet.add(myName); updateOnline();
- fetch(`https://ntfy.sh/${TOPIC}`,{method:'POST',body:`JOIN:${myName}`});
+ document.getElementById('wName').innerText=me.name;
+ document.getElementById('myMini').innerHTML=`<img src="${me.photo}" style="width:36px;height:36px;border-radius:50%"><b>${me.name}</b>`;
+ document.getElementById('myFullProfile').innerHTML=`<img src="${me.photo}" style="width:100px;height:100px;border-radius:50%"><h3>${me.name}</h3><p>${me.work} - ${me.email}</p><p>DOB: ${me.dob}</p><p>${me.bio}</p>`;
+ renderPeople(); renderFeed();
+ onlineSet.add(me.name); updateOnline();
  listen();
 }
-function showTab(t){
- document.getElementById('homeTab').style.display=t==='home'?'block':'none';
- document.getElementById('chatTab').style.display=t==='chat'?'block':'none';
- document.getElementById('meetTab').style.display=t==='meet'?'block':'none';
- document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
- document.getElementById(t==='home'?'tb1':t==='chat'?'tb2':'tb3').classList.add('active');
+function show(s){
+ document.getElementById('homeSec').style.display=s==='home'?'block':'none';
+ document.getElementById('peopleSec').style.display=s==='people'?'block':'none';
+ document.getElementById('chatSec').style.display=s==='chat'?'block':'none';
+ document.getElementById('meetSec').style.display=s==='meet'?'block':'none';
+ document.getElementById('profileSec').style.display=s==='profile'?'block':'none';
+ document.querySelectorAll('.left button').forEach(b=>b.classList.remove('active'));
+ document.getElementById('m-'+s).classList.add('active');
+}
+function renderPeople(){
+ let grid=document.getElementById('peopleGrid');
+ let list=[...people];
+ // add me if not in list
+ if(!list.find(p=>p.email===me.email)) list.unshift(me);
+ grid.innerHTML=list.map(p=>`
+  <div class="p-card">
+   <img src="${p.photo}">
+   <div><b>${p.name}</b></div>
+   <span class="badge">${p.work}</span>
+   <div style="font-size:12px">${p.bio||''}</div>
+   <button class="btn" style="margin-top:6px" onclick="show('chat')">Chat ${p.name.split(' ')[0]}</button>
+  </div>
+ `).join('');
 }
 function renderFeed(){
- document.getElementById('feed').innerHTML=posts.map(p=>`<div class="post"><b>${p.name}</b><br>${p.text}<br><span class="small">${p.time}</span></div>`).join('');
+ document.getElementById('feed').innerHTML=posts.map(p=>`<div style="padding:8px;border-top:1px solid #eee"><b>${p.name}</b>: ${p.text}</div>`).join('');
 }
 function doPost(){
- let txt=document.getElementById('postTxt').value.trim(); if(!txt)return;
- let obj={name:myName,text:txt,time:new Date().toLocaleTimeString()};
- posts.unshift(obj); localStorage.setItem('ng_posts',JSON.stringify(posts));
+ let t=document.getElementById('postTxt').value.trim(); if(!t)return;
+ posts.unshift({name:me.name,text:t}); localStorage.setItem('naija_posts',JSON.stringify(posts));
  document.getElementById('postTxt').value=''; renderFeed();
+ fetch(`https://ntfy.sh/${TOPIC}`,{method:'POST',body:`CHAT:${me.name}: ${t}`});
 }
 function listen(){
  const es=new EventSource(`https://ntfy.sh/${TOPIC}/sse`);
  es.onmessage=ev=>{
-  let d=ev.data; if(!d) return;
-  if(d.startsWith('JOIN:')){ let n=d.replace('JOIN:',''); onlineSet.add(n); updateOnline(); addChat(n+' don join NG-MEET! 🟢',false); }
-  if(d.startsWith('CHAT:')){ addChat(d.replace('CHAT:',''),false); }
+  try{
+   let d=ev.data; if(!d) return;
+   if(d.startsWith('JOIN:')){
+    let u=JSON.parse(d.replace('JOIN:',''));
+    if(!people.find(p=>p.email===u.email)){ people.unshift(u); localStorage.setItem('naija_people',JSON.stringify(people)); renderPeople(); }
+    onlineSet.add(u.name); updateOnline(); addChat(u.name+' don join village 🟢',false);
+   }
+   if(d.startsWith('CHAT:')){ addChat(d.replace('CHAT:',''),false); }
+  }catch(e){}
  };
 }
 function updateOnline(){
@@ -117,24 +191,22 @@ function updateOnline(){
  document.getElementById('onlineCount').innerText=uniq.length;
  document.getElementById('users').innerHTML=uniq.map(n=>`<span class="badge">${n} 🟢</span>`).join('');
 }
-function addChat(text,isMe){
+function addChat(txt,isMe){
  let m=document.getElementById('messages'); let div=document.createElement('div');
- div.className=isMe?'msg me':'msg'; div.innerText=text; m.appendChild(div); m.scrollTop=m.scrollHeight;
+ div.className=isMe?'msg me':'msg'; div.innerText=txt; m.appendChild(div); m.scrollTop=m.scrollHeight;
 }
 function sendChat(){
  let t=document.getElementById('chatInput').value.trim(); if(!t)return;
- let full=`CHAT:${myName}: ${t}`;
- fetch(`https://ntfy.sh/${TOPIC}`,{method:'POST',body:full});
- addChat(`${myName}: ${t}`,true);
+ fetch(`https://ntfy.sh/${TOPIC}`,{method:'POST',body:`CHAT:${me.name}: ${t}`});
+ addChat(`${me.name}: ${t}`,true);
  document.getElementById('chatInput').value='';
 }
 function startMeet(){
- let room='NGMEET'+Math.floor(Math.random()*9000);
- document.getElementById('jitsi').style.display='block';
- document.getElementById('jitsi').innerHTML='';
+ let room='NAIJA'+Math.floor(Math.random()*90000);
+ document.getElementById('jitsi').style.display='block'; document.getElementById('jitsi').innerHTML='';
  new JitsiMeetExternalAPI('meet.ffmuc.net',{roomName:room,parentNode:document.getElementById('jitsi'),width:'100%',height:500});
- alert('Share link: https://meet.ffmuc.net/'+room);
 }
+function editProfile(){ localStorage.removeItem('naija_me'); location.reload(); }
 boot();
 </script>
 </body>
